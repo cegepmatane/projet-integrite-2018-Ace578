@@ -24,24 +24,35 @@ public class VueLivre extends Application {
 		
 		GridPane grilleLivre = new GridPane();
 		
+		
 		idTitre = new Label("Titre : ");
-		valeurTitre = new Label("Le Seigneur des Anneaux");		
+		valeurTitre = new Label("");		
 		grilleLivre.add(idTitre, 0, 0);
 		grilleLivre.add(valeurTitre, 1, 0);
 		
 		idAnnee = new Label("Annee : ");
-		valeurAnnee = new Label("1954");
+		valeurAnnee = new Label("");
 		grilleLivre.add(valeurAnnee, 1, 1);
 		grilleLivre.add(idAnnee, 0, 1);
 		
 		idStyle = new Label("Style : ");
-		valeurStyle = new Label("Fantasy");
+		valeurStyle = new Label("");
 		grilleLivre.add(idStyle, 0, 3);
 		grilleLivre.add(valeurStyle, 1, 3);
 		
 		
 		stade.setScene(new Scene(grilleLivre, 300, 250));
 		stade.show();
+		
+		Livre livre = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
+		this.afficherLivre(livre);
+		
+	}
+	
+	public void afficherLivre(Livre livre) {
+		this.valeurTitre.setText(livre.getTitre());
+		this.valeurAnnee.setText(livre.getAnnee());
+		this.valeurStyle.setText(livre.getStyle());
 		
 	}
 }
