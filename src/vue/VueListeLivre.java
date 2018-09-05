@@ -16,7 +16,6 @@ public class VueListeLivre extends Application {
 	
 	protected GridPane grilleLivres;
 	
-	
 	@Override
 	public void start(Stage stade) throws Exception {
 		Pane panneau = new Pane();	
@@ -31,8 +30,7 @@ public class VueListeLivre extends Application {
 		listeLivresTest.add(new Livre("La ferme des animaux", "1945", "Apologue"));
 		listeLivresTest.add(new Livre("Le vieil homme et la mer", "1952", "Fiction"));
 		this.afficherListeLivre(listeLivresTest);
-		
-			
+	
 	}
 	
 	
@@ -40,6 +38,7 @@ public class VueListeLivre extends Application {
 			
 		
 		int numero = 0;
+		
 		this.grilleLivres.add(new Label("Titre"), 0, numero);
 		this.grilleLivres.add(new Label("Annee"), 1, numero);
 		for (Livre livre : listeLivres) {
