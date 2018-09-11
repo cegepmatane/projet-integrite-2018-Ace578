@@ -1,5 +1,7 @@
 package accesseur;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +22,19 @@ public class LivreDAO {
 		
 		String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
 		String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
-		String BASEDEDONNES_USAGER = "postgres";
+		String BASEDEDONNEES_USAGER = "postgres";
 		String BASEDEDONNEES_MOTDEPASSE = "jeff57880";
 		
 		try {
 			Class.forName(BASEDEDONNEES_DRIVER);
 		} catch (ClassNotFoundException e) {
 			
+			e.printStackTrace();
+		}
+		
+		try {
+			DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return this.simulerListerLivres();
