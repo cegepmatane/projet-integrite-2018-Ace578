@@ -10,15 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modele.Livre;
 
-public class VueAjouterLivre extends Application{
+public class VueAjouterLivre extends Scene{
 
 	protected TextField valeurTitre;
 	protected TextField valeurAnnee;
 	protected TextField valeurStyle;
 
-	@Override
-	public void start(Stage stade) throws Exception {
-		VBox panneau = new VBox();	
+	public VueAjouterLivre() {
+		super(new VBox(), 400, 400);
+		VBox panneau = (VBox) this.getRoot();	
 		GridPane grilleLivre = new GridPane();
 
 		
@@ -37,8 +37,7 @@ public class VueAjouterLivre extends Application{
 		panneau.getChildren().add(new Label("Ajouter un livre")); 
 		panneau.getChildren().add(grilleLivre);
 		panneau.getChildren().add(new Button("Enregistrer le livre"));
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();		
+				
 	}
 	
 	public Livre demanderLivre(){

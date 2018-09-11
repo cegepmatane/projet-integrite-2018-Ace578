@@ -11,25 +11,20 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modele.Livre;
 
-public class VueListeLivre extends Application {
+public class VueListeLivre extends Scene {
 
 	
 	protected GridPane grilleLivres;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		Pane panneau = new Pane();	
+	public VueListeLivre() {
+		
+		super(new GridPane(), 400, 400);
+		Pane panneau = (Pane) this.getRoot();	
 		grilleLivres = new GridPane();
 		panneau.getChildren().add(grilleLivres);
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();	
+			
 		
-		List listeLivresTest = new ArrayList<Livre>();
-		listeLivresTest.add(new Livre("Le Seigneur des Anneaux", "1954", "Fantasy"));
-		listeLivresTest.add(new Livre("Je suis une légende", "1954", "Post-Apocalyptique"));
-		listeLivresTest.add(new Livre("La ferme des animaux", "1945", "Apologue"));
-		listeLivresTest.add(new Livre("Le vieil homme et la mer", "1952", "Fiction"));
-		this.afficherListeLivre(listeLivresTest);
+		
 	
 	}
 	

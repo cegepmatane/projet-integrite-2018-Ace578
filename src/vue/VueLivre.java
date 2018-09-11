@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modele.Livre;
 
-public class VueLivre extends Application {
+public class VueLivre extends Scene  {
 	
 	
 	protected Label valeurTitre;
@@ -17,13 +17,13 @@ public class VueLivre extends Application {
 	protected Label valeurStyle;
 	protected Label idStyle;
 	
+	public VueLivre() {
 
 
-
-	@Override
-	public void start(Stage stade) throws Exception {
+	
 		
-		
+		super(new Pane(),400,400);
+		Pane panneau = (Pane) this.getRoot();
 		GridPane grilleLivre = new GridPane();
 		
 		
@@ -43,14 +43,8 @@ public class VueLivre extends Application {
 		grilleLivre.add(valeurStyle, 1, 3);
 		
 		
-		stade.setScene(new Scene(grilleLivre, 300, 250));
-		stade.show();
-		
-		Livre livre = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
-		this.afficherLivre(livre);
-		
+		panneau.getChildren().add(grilleLivre);	
 	}
-	
 	public void afficherLivre(Livre livre) {
 		this.valeurTitre.setText(livre.getTitre());
 		this.valeurAnnee.setText(livre.getAnnee());
