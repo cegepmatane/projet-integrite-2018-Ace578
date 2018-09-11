@@ -1,7 +1,10 @@
 package accesseur;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,16 @@ public class LivreDAO {
 		
 		try {
 			DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+			
+			Statement requeteListeLivres = connection.createStatement();
+			ResultSet curseurListeLivres = requeteListeLivres.executeQuery("SELECT * FROM livre");
+			curseurListeLivres.next();
+			String titre = curseurListeLivres.getString("titre");
+			String annee = curseurListeLivres.getString("annee");
+			String style = curseurListeLivres.getString("style");
+			
+			System.out.println("Livre " + titre + " écris en " + annee + " : " + style);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
