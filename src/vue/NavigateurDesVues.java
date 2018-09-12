@@ -57,6 +57,10 @@ public class NavigateurDesVues extends Application{
 		return vueLivre;
 	}
 	
+	public VueEditerLivre getVueEditerLivre() {
+		return vueEditerLivre;
+	}
+	
 	public void naviguerVersVueLivre() {
 		stade.setScene(this.vueLivre);
 		stade.show();
