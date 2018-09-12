@@ -5,7 +5,10 @@ import java.util.List;
 
 import controleur.ControleurLivre;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +20,7 @@ public class VueListeLivre extends Scene {
 	
 	protected GridPane grilleLivres;
 	private ControleurLivre controleur = null;
+	private Button actionNaviguerAjouterLivre;
 	
 	public VueListeLivre() {
 		
@@ -24,6 +28,7 @@ public class VueListeLivre extends Scene {
 		Pane panneau = (Pane) this.getRoot();	
 		grilleLivres = new GridPane();
 		panneau.getChildren().add(grilleLivres);
+		this.actionNaviguerAjouterLivre = new Button("Ajouter un livre");
 			
 		
 		
@@ -33,7 +38,7 @@ public class VueListeLivre extends Scene {
 	
 	public void afficherListeLivre(List<Livre> listeLivres) {
 			
-		
+		this.grilleLivres.getChildren().clear();
 		int numero = 0;
 		
 		this.grilleLivres.add(new Label("Titre"), 0, numero);
@@ -43,6 +48,18 @@ public class VueListeLivre extends Scene {
 			this.grilleLivres.add(new Label(livre.getTitre()), 0, numero);
 			this.grilleLivres.add(new Label(livre.getAnnee()), 1, numero);
 		}
+		
+		this.actionNaviguerAjouterLivre.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				controleur.notifierNaviguerAjouterLivre();
+				
+			}
+			
+		});
+		
+		this.grilleLivres.add(this.actionNaviguerAjouterLivre, 1, ++numero);
 	
 
 	}
