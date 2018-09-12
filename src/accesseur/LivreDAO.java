@@ -35,21 +35,27 @@ public class LivreDAO {
 			e.printStackTrace();
 		}
 		
+		List<Livre> listeLivres = new ArrayList<Livre>();
+		
 		try {
 			DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
 			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
 			
 			Statement requeteListeLivres = connection.createStatement();
 			ResultSet curseurListeLivres = requeteListeLivres.executeQuery("SELECT * FROM livre");
-			curseurListeLivres.next();
-			String titre = curseurListeLivres.getString("titre");
-			String annee = curseurListeLivres.getString("annee");
-			String style = curseurListeLivres.getString("style");
+			while (curseurListeLivres.next()) {
+				String titre = curseurListeLivres.getString("titre");
+				String annee = curseurListeLivres.getString("annee");
+				String style = curseurListeLivres.getString("style");
+				System.out.println("Livre " + titre + " écris en " + annee + " : " + style);
+				Livre livre = new Livre(titre, annee, style);
+				listeLivres.add(livre);
+			}
 			
-			System.out.println("Livre " + titre + " écris en " + annee + " : " + style);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return this.simulerListerLivres();
+		//return this.simulerListerLivres();
+		return listeLivres;
 	}
 }
