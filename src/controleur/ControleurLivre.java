@@ -79,10 +79,10 @@ public class ControleurLivre {
 		this.navigateur.naviguerVersVueAjouterLivre();
 	}
 	
-	public void notifierNaviguerEditerLivre() {
-		System.out.println("ControleurMouton.notifierNaviguerEditerLivre()");
-		Livre livreTest = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
-		this.vueEditerLivre.afficherLivre(livreTest);
+	public void notifierNaviguerEditerLivre(int idLivre) {
+		System.out.println("ControleurMouton.notifierNaviguerEditerLivre("+idLivre+")");
+		
+		this.vueEditerLivre.afficherLivre(this.livreDAO.rapporterLivre(idLivre));
 		this.navigateur.naviguerVersVueEditerLivre();
 	}
 	

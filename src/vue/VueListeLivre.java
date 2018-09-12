@@ -50,7 +50,7 @@ public class VueListeLivre extends Scene {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-					controleur.notifierNaviguerEditerLivre();
+					controleur.notifierNaviguerEditerLivre(livre.getId());
 					
 				}
 				
