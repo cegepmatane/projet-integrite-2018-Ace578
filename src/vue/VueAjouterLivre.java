@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.ControleurLivre;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class VueAjouterLivre extends Scene{
 	protected TextField valeurTitre;
 	protected TextField valeurAnnee;
 	protected TextField valeurStyle;
+	private ControleurLivre controleur = null;
 
 	public VueAjouterLivre() {
 		super(new VBox(), 400, 400);
@@ -48,6 +50,10 @@ public class VueAjouterLivre extends Scene{
 								this.valeurStyle.getText()
 								);
 		return livre;
+	}
+	
+	public void setControleur(ControleurLivre controleur) {
+		this.controleur = controleur;
 	}
 
 }

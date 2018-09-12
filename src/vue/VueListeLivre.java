@@ -3,6 +3,7 @@ package vue;
 import java.util.ArrayList;
 import java.util.List;
 
+import controleur.ControleurLivre;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ public class VueListeLivre extends Scene {
 
 	
 	protected GridPane grilleLivres;
+	private ControleurLivre controleur = null;
 	
 	public VueListeLivre() {
 		
@@ -43,6 +45,10 @@ public class VueListeLivre extends Scene {
 		}
 	
 
+	}
+	
+	public void setControleur(ControleurLivre controleur) {
+		this.controleur = controleur;
 	}
 	
 }

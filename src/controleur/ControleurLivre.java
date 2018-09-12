@@ -17,6 +17,7 @@ public class ControleurLivre {
 	private VueLivre vueLivre = null;
 	private VueListeLivre vueListeLivre = null;
 	private VueAjouterLivre vueAjouterLivre = null;
+	LivreDAO livreDAO = null;
 	
 	private ControleurLivre() {
 		
@@ -49,6 +50,14 @@ public class ControleurLivre {
 		this.navigateur.naviguerVersVueAjouterLivre();
 		this.navigateur.naviguerVersVueListeLivre();
 		this.navigateur.naviguerVersVueLivre();
+		
+	}
+	
+	public void notifierEnregistrerLivre() {
+		System.out.println("ControleurLivre.notifierEnregistrerLivre()");
+		Livre livre = this.navigateur.getVueAjouterLivre().demanderLivre();
+		//this.livreDAO.ajouterLivre(livre);
+		this.navigateur.naviguerVersVueListeLivre();
 		
 	}
 	

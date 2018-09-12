@@ -1,4 +1,5 @@
 package vue;
+import controleur.ControleurLivre;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ public class VueLivre extends Scene  {
 	protected Label idAnnee;
 	protected Label valeurStyle;
 	protected Label idStyle;
+	private ControleurLivre controleur = null;
 	
 	public VueLivre() {
 
@@ -50,5 +52,9 @@ public class VueLivre extends Scene  {
 		this.valeurAnnee.setText(livre.getAnnee());
 		this.valeurStyle.setText(livre.getStyle());
 		
+	}
+	
+	public void setControleur(ControleurLivre controleur) {
+		this.controleur = controleur;
 	}
 }
