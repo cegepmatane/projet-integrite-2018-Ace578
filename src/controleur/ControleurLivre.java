@@ -50,12 +50,18 @@ public class ControleurLivre {
 		
 		Livre Livre = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
 		this.vueLivre.afficherLivre(Livre); 
-		//TEST//
-		LivreDAO LivreDAO = new LivreDAO();
-		List<Livre> listeLivresTest = LivreDAO.listerLivres();
-		this.navigateur.naviguerVersVueAjouterLivre();
-		this.navigateur.naviguerVersVueListeLivre();
+		
 		this.navigateur.naviguerVersVueLivre();
+		//TEST//
+		
+		List<Livre> listeLivresTest = livreDAO.listerLivres();
+		this.vueListeLivre.afficherListeLivre(listeLivresTest);
+		
+		
+	
+		//this.navigateur.naviguerVersVueAjouterLivre();
+		this.navigateur.naviguerVersVueListeLivre();
+		
 		
 	}
 	
