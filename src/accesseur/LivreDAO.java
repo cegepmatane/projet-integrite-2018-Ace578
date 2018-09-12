@@ -26,7 +26,7 @@ public class LivreDAO {
 		String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
 		String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
 		String BASEDEDONNEES_USAGER = "postgres";
-		String BASEDEDONNEES_MOTDEPASSE = "jeff57880";
+		String BASEDEDONNEES_MOTDEPASSE = "password";
 		
 		try {
 			Class.forName(BASEDEDONNEES_DRIVER);
