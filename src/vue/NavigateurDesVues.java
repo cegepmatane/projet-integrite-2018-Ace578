@@ -19,9 +19,10 @@ public class NavigateurDesVues extends Application{
 
 	public NavigateurDesVues() 
 	{
-		this.vueAjouterLivre = new VueAjouterLivre();
 		this.vueListeLivre = new VueListeLivre();
-		this.vueLivre = new VueLivre();
+		this.vueLivre = new VueLivre();	
+		this.vueAjouterLivre = new VueAjouterLivre();
+		
 		
 		
 	}
