@@ -83,6 +83,34 @@ public class LivreDAO {
 		return listeLivres;
 	}
 		
+		
+		public Livre rapporterLivre(int idLivre) {
+			Statement requeteLivre;
+			
+			try {
+				requeteLivre = connection.createStatement();
+				String SQL_RAPPORTER_LIVRE = "SELECT * FROM livre WHERE id ="+idLivre;//refaire la requête préparée pour la sécurité
+				System.out.println(SQL_RAPPORTER_LIVRE);
+				ResultSet curseurLivre = requeteLivre.executeQuery(SQL_RAPPORTER_LIVRE);
+				curseurLivre.next();
+				int id = curseurLivre.getInt("id");
+				String titre = curseurLivre.getString("titre");
+				String annee = curseurLivre.getString("annee");
+				String style = curseurLivre.getString("style");
+				System.out.println("Le livre "+titre+"a été écris en "+annee+" et est du style "+style);
+				Livre livre = new Livre(titre, annee, style);
+				livre.setId(id);
+				return livre;
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			
+			
+			return null;
+		}
+		
 		public void ajouterLivre(Livre livre) {
 			System.out.println("LivreDAO.ajouterLivre()");
 			try {
