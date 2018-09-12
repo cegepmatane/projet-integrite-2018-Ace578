@@ -63,6 +63,12 @@ public class VueEditerLivre extends Scene{
 		return livre;
 	}
 	
+	public void afficherLivre(Livre livre) {
+		this.valeurTitre.setText(livre.getTitre());
+		this.valeurAnnee.setText(livre.getAnnee());
+		this.valeurStyle.setText(livre.getStyle());
+	}
+	
 	public void setControleur(ControleurLivre controleur) {
 		this.controleur = controleur;
 	}
