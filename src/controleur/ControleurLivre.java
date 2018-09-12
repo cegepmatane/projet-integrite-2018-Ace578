@@ -66,8 +66,13 @@ public class ControleurLivre {
 	}
 	
 	public void notifierNaviguerAjouterLivre() {
-		System.out.println("ControleurMouton.notifierNaviguerAjouterMouton()");
+		System.out.println("ControleurMouton.notifierNaviguerAjouterLivre()");
 		this.navigateur.naviguerVersVueAjouterLivre();
+	}
+	
+	public void notifierNaviguerEditerLivre() {
+		System.out.println("ControleurMouton.notifierNaviguerEditerLivre()");
+		this.navigateur.naviguerVersVueEditerLivre();
 	}
 	
 }

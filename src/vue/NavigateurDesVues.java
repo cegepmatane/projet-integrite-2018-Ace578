@@ -12,6 +12,7 @@ public class NavigateurDesVues extends Application{
 	private VueAjouterLivre vueAjouterLivre;
 	private VueListeLivre vueListeLivre;
 	private VueLivre vueLivre;
+	private VueEditerLivre vueEditerLivre;
 	private Stage stade;
 	
 	
@@ -22,6 +23,7 @@ public class NavigateurDesVues extends Application{
 		this.vueListeLivre = new VueListeLivre();
 		this.vueLivre = new VueLivre();	
 		this.vueAjouterLivre = new VueAjouterLivre();
+		this.vueEditerLivre = new VueEditerLivre();
 		
 		
 		
@@ -36,9 +38,11 @@ public class NavigateurDesVues extends Application{
 		
 		ControleurLivre controleur = ControleurLivre.getInstance();
 		controleur.activerVues(this);
-		this.vueAjouterLivre.setControleur(controleur);
-		this.vueListeLivre.setControleur(controleur);
 		this.vueLivre.setControleur(controleur);
+		this.vueListeLivre.setControleur(controleur);		
+		this.vueAjouterLivre.setControleur(controleur);
+		this.vueEditerLivre.setControleur(controleur);
+		
 	}
 	
 	public VueAjouterLivre getVueAjouterLivre() {
@@ -65,6 +69,11 @@ public class NavigateurDesVues extends Application{
 	
 	public void naviguerVersVueListeLivre() {
 		stade.setScene(this.vueListeLivre);
+		stade.show();
+	}
+	
+	public void naviguerVersVueEditerLivre() {
+		stade.setScene(this.vueEditerLivre);
 		stade.show();
 	}
 	
