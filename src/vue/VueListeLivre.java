@@ -44,9 +44,21 @@ public class VueListeLivre extends Scene {
 		this.grilleLivres.add(new Label("Titre"), 0, numero);
 		this.grilleLivres.add(new Label("Annee"), 1, numero);
 		for (Livre livre : listeLivres) {
+			
+			Button actionEditerLivre = new Button("Editer");
+			actionEditerLivre.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent arg0) {
+					controleur.notifierNaviguerEditerLivre();
+					
+				}
+				
+			});
 			numero++;
 			this.grilleLivres.add(new Label(livre.getTitre()), 0, numero);
 			this.grilleLivres.add(new Label(livre.getAnnee()), 1, numero);
+			this.grilleLivres.add(actionEditerLivre,2,numero);
 		}
 		
 		this.actionNaviguerAjouterLivre.setOnAction(new EventHandler<ActionEvent>() {
