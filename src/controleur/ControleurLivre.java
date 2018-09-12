@@ -7,6 +7,7 @@ import accesseur.LivreDAO;
 import modele.Livre;
 import vue.NavigateurDesVues;
 import vue.VueAjouterLivre;
+import vue.VueEditerLivre;
 import vue.VueListeLivre;
 import vue.VueLivre;
 
@@ -17,6 +18,7 @@ public class ControleurLivre {
 	private VueLivre vueLivre = null;
 	private VueListeLivre vueListeLivre = null;
 	private VueAjouterLivre vueAjouterLivre = null;
+	private VueEditerLivre vueEditerLivre = null;
 	LivreDAO livreDAO = null;
 	
 	private ControleurLivre() {
@@ -43,6 +45,7 @@ public class ControleurLivre {
 		this.vueLivre = this.navigateur.getVueLivre();
 		this.vueListeLivre = this.navigateur.getVueListeLivre();
 		this.vueAjouterLivre = this.navigateur.getVueAjouterLivre();
+		this.vueEditerLivre = navigateur.getVueEditerLivre();
 		
 		
 		Livre Livre = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
@@ -72,6 +75,8 @@ public class ControleurLivre {
 	
 	public void notifierNaviguerEditerLivre() {
 		System.out.println("ControleurMouton.notifierNaviguerEditerLivre()");
+		Livre livreTest = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
+		this.vueEditerLivre.afficherLivre(livreTest);
 		this.navigateur.naviguerVersVueEditerLivre();
 	}
 	
