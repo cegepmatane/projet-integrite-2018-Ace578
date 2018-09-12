@@ -10,7 +10,17 @@ import java.util.List;
 
 import modele.Livre;
 
+
+
+
 public class LivreDAO {
+	
+	
+	String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
+	String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
+	String BASEDEDONNEES_USAGER = "postgres";
+	String BASEDEDONNEES_MOTDEPASSE = "password";
+	private Connection connection = null;
 
 	private List<Livre> simulerListerLivres() {
 		List listeLivresTest = new ArrayList<Livre>();
@@ -21,12 +31,9 @@ public class LivreDAO {
 		return listeLivresTest;
 	}
 	
-	public List<Livre> listerLivres() {
+	public LivreDAO() {
 		
-		String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-		String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
-		String BASEDEDONNEES_USAGER = "postgres";
-		String BASEDEDONNEES_MOTDEPASSE = "password";
+		
 		
 		try {
 			Class.forName(BASEDEDONNEES_DRIVER);
@@ -35,20 +42,37 @@ public class LivreDAO {
 			e.printStackTrace();
 		}
 		
-		List<Livre> listeLivres = new ArrayList<Livre>();
 		
 		try {
-			DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
 			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	 
+		
+	}
+		
+		
+		
+		
+		
+		public List<Livre> listerLivres() {
+			
+		List<Livre> listeLivres = new ArrayList<Livre>();
+		try {
+			
 			
 			Statement requeteListeLivres = connection.createStatement();
 			ResultSet curseurListeLivres = requeteListeLivres.executeQuery("SELECT * FROM livre");
 			while (curseurListeLivres.next()) {
+				int id = curseurListeLivres.getInt("id");
 				String titre = curseurListeLivres.getString("titre");
 				String annee = curseurListeLivres.getString("annee");
 				String style = curseurListeLivres.getString("style");
 				System.out.println("Livre " + titre + " écris en " + annee + " : " + style);
 				Livre livre = new Livre(titre, annee, style);
+				livre.setId(id);
 				listeLivres.add(livre);
 			}
 			

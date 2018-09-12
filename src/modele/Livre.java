@@ -2,6 +2,7 @@ package modele;
 
 public class Livre {
 	
+	protected int id;
 	protected String titre;
 	protected String annee;
 	protected String style;
@@ -56,6 +57,18 @@ public class Livre {
 	public void setStyle(String style) {
 		this.style = style;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 	
