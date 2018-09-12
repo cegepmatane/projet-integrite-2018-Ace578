@@ -67,6 +67,15 @@ public class ControleurLivre {
 	
 	public void notifierEnregistrerLivre() {
 		System.out.println("ControleurLivre.notifierEnregistrerLivre()");
+		Livre livre = this.navigateur.getVueEditerLivre().demanderLivre();
+		this.livreDAO.modifierLivre(livre);
+		this.vueListeLivre.afficherListeLivre(this.livreDAO.listerLivres());
+		this.navigateur.naviguerVersVueListeLivre();
+		
+	}
+	
+	public void notifierEnregistrerNouveauLivre () {
+		System.out.println("ControleurLivre.notifierEnregistrerNouveauLivre()");
 		Livre livre = this.navigateur.getVueAjouterLivre().demanderLivre();
 		this.livreDAO.ajouterLivre(livre);
 		this.vueListeLivre.afficherListeLivre(this.livreDAO.listerLivres());
