@@ -30,7 +30,7 @@ public class VueAjouterLivre extends Scene{
 			
 			public void handle(ActionEvent arg0) {
 				
-				controleur.notifierEnregistrerLivre();
+				controleur.notifierEnregistrerNouveauLivre();
 			
 		}});
 

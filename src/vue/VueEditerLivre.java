@@ -20,6 +20,7 @@ public class VueEditerLivre extends Scene{
 	protected TextField valeurStyle;
 	private ControleurLivre controleur = null;
 	protected Button actionEnregistrerLivre = null;
+	private int idLivre = 0;
 
 	public VueEditerLivre() {
 		super(new VBox(), 400, 400);
@@ -60,10 +61,12 @@ public class VueEditerLivre extends Scene{
 								this.valeurAnnee.getText(), 
 								this.valeurStyle.getText()
 								);
+		livre.setId(idLivre);
 		return livre;
 	}
 	
 	public void afficherLivre(Livre livre) {
+		this.idLivre = livre.getId();
 		this.valeurTitre.setText(livre.getTitre());
 		this.valeurAnnee.setText(livre.getAnnee());
 		this.valeurStyle.setText(livre.getStyle());

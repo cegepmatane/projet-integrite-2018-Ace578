@@ -122,5 +122,22 @@ public class LivreDAO {
 				
 				e.printStackTrace();
 			}
+			
+			
 		}
+		
+		public void modifierLivre(Livre livre) {
+			System.out.println("LivreDAO.modifierLivre()");
+			
+			try {
+				Statement requeteModifierLivre = connection.createStatement();
+				String SQL_MODIFIER_LIVRE = "UPDATE livre SET titre ='"+livre.getTitre()+"', annee ='"+livre.getAnnee()+"', style ='"+livre.getStyle()+"'WHERE id ="+livre.getId();
+				requeteModifierLivre.execute(SQL_MODIFIER_LIVRE);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+		
 }
