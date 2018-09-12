@@ -59,7 +59,7 @@ public class ControleurLivre {
 	public void notifierEnregistrerLivre() {
 		System.out.println("ControleurLivre.notifierEnregistrerLivre()");
 		Livre livre = this.navigateur.getVueAjouterLivre().demanderLivre();
-		//this.livreDAO.ajouterLivre(livre);
+		this.livreDAO.ajouterLivre(livre);
 		this.navigateur.naviguerVersVueListeLivre();
 		
 	}

@@ -82,4 +82,17 @@ public class LivreDAO {
 		//return this.simulerListerLivres();
 		return listeLivres;
 	}
+		
+		public void ajouterLivre(Livre livre) {
+			System.out.println("LivreDAO.ajouterLivre()");
+			try {
+				Statement requeteAjouterLivre = connection.createStatement();
+				String sqlAjouterLivre = "INSERT into livre(titre, annee, style) VALUES ('"+livre.getTitre()+"','"+livre.getAnnee()+"','"+livre.getStyle()+"')";
+				System.out.println("SQL : " +sqlAjouterLivre);
+				requeteAjouterLivre.executeQuery(sqlAjouterLivre);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
 }
