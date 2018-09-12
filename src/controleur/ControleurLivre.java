@@ -84,12 +84,12 @@ public class ControleurLivre {
 	}
 	
 	public void notifierNaviguerAjouterLivre() {
-		System.out.println("ControleurMouton.notifierNaviguerAjouterLivre()");
+		System.out.println("ControleurLivre.notifierNaviguerAjouterLivre()");
 		this.navigateur.naviguerVersVueAjouterLivre();
 	}
 	
 	public void notifierNaviguerEditerLivre(int idLivre) {
-		System.out.println("ControleurMouton.notifierNaviguerEditerLivre("+idLivre+")");
+		System.out.println("ControleurLivre.notifierNaviguerEditerLivre("+idLivre+")");
 		
 		this.vueEditerLivre.afficherLivre(this.livreDAO.rapporterLivre(idLivre));
 		this.navigateur.naviguerVersVueEditerLivre();
