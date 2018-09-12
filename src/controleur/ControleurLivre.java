@@ -20,10 +20,13 @@ public class ControleurLivre {
 	LivreDAO livreDAO = null;
 	
 	private ControleurLivre() {
-		
+		System.out.println("Initialisation du controleur");
+		this.livreDAO = new LivreDAO();
 	}
 	
 	private static ControleurLivre instance = null; 
+	
+	
 	public static ControleurLivre getInstance() {
 		
 		if(instance==null) {

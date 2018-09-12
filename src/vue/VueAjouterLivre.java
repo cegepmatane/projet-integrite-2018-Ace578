@@ -2,6 +2,8 @@ package vue;
 
 import controleur.ControleurLivre;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,11 +19,20 @@ public class VueAjouterLivre extends Scene{
 	protected TextField valeurAnnee;
 	protected TextField valeurStyle;
 	private ControleurLivre controleur = null;
+	protected Button actionEnregistrerLivre = null;
 
 	public VueAjouterLivre() {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();	
 		GridPane grilleLivre = new GridPane();
+		this.actionEnregistrerLivre = new Button("Enregistrer");
+		this.actionEnregistrerLivre.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierEnregistrerLivre();
+			
+		}});
 
 		
 		valeurTitre = new TextField();
@@ -38,7 +49,7 @@ public class VueAjouterLivre extends Scene{
 		
 		panneau.getChildren().add(new Label("Ajouter un livre")); 
 		panneau.getChildren().add(grilleLivre);
-		panneau.getChildren().add(new Button("Enregistrer le livre"));
+		panneau.getChildren().add(this.actionEnregistrerLivre);
 				
 	}
 	

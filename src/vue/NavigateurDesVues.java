@@ -35,6 +35,9 @@ public class NavigateurDesVues extends Application{
 		
 		ControleurLivre controleur = ControleurLivre.getInstance();
 		controleur.activerVues(this);
+		this.vueAjouterLivre.setControleur(controleur);
+		this.vueListeLivre.setControleur(controleur);
+		this.vueLivre.setControleur(controleur);
 	}
 	
 	public VueAjouterLivre getVueAjouterLivre() {
