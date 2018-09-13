@@ -21,6 +21,7 @@ public class VueEditerLivre extends Scene{
 	private ControleurLivre controleur = null;
 	protected Button actionEnregistrerLivre = null;
 	private int idLivre = 0;
+	protected GridPane grilleListePrix = new GridPane();
 
 	public VueEditerLivre() {
 		super(new VBox(), 400, 400);
@@ -48,8 +49,15 @@ public class VueEditerLivre extends Scene{
 		grilleLivre.add(new Label("Style : "), 0, 2);
 		grilleLivre.add(valeurStyle, 1, 2);	
 		
+		
+		grilleListePrix.add(new Label("Prix d'écriture"), 0, 0);
+		grilleListePrix.add(new Label("Prix de style"), 0, 1);
+		grilleListePrix.add(new Label("Prix de la comédie "), 0, 2);
+		grilleListePrix.add(new Label("Prix de la couvertur"), 0, 3);
+		
 		panneau.getChildren().add(new Label("Editer un livre")); 
 		panneau.getChildren().add(grilleLivre);
+		panneau.getChildren().add(grilleListePrix);
 		panneau.getChildren().add(this.actionEnregistrerLivre);
 				
 	}
