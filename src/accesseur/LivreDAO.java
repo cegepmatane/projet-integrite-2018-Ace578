@@ -16,10 +16,10 @@ import modele.Livre;
 public class LivreDAO {
 	
 	
-	String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-	String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
-	String BASEDEDONNEES_USAGER = "postgres";
-	String BASEDEDONNEES_MOTDEPASSE = "password";
+	protected String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
+	protected String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
+	protected String BASEDEDONNEES_USAGER = "postgres";
+	protected String BASEDEDONNEES_MOTDEPASSE = "password";
 	private Connection connection = null;
 
 	private List<Livre> simulerListerLivres() {

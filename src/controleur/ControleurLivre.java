@@ -5,6 +5,7 @@ import java.util.List;
 
 import accesseur.LivreDAO;
 import modele.Livre;
+import modele.Prix;
 import vue.NavigateurDesVues;
 import vue.VueAjouterLivre;
 import vue.VueEditerLivre;
@@ -19,7 +20,7 @@ public class ControleurLivre {
 	private VueListeLivre vueListeLivre = null;
 	private VueAjouterLivre vueAjouterLivre = null;
 	private VueEditerLivre vueEditerLivre = null;
-	LivreDAO livreDAO = null;
+	private LivreDAO livreDAO = null;
 	
 	private ControleurLivre() {
 		System.out.println("Initialisation du controleur");
@@ -61,6 +62,20 @@ public class ControleurLivre {
 	
 		//this.navigateur.naviguerVersVueAjouterLivre();
 		this.navigateur.naviguerVersVueListeLivre();
+		
+		Prix prix;
+		List<Prix> listePrix = new ArrayList<Prix>();
+		prix = new Prix("Prix d'écriture", "1960");
+		listePrix.add(prix);
+		prix = new Prix("Prix de style", "1960");
+		listePrix.add(prix);
+		prix = new Prix("Prix de la comédie", "1960");
+		listePrix.add(prix);
+		prix = new Prix("Prix de la couveture", "1960");
+		listePrix.add(prix);
+		
+		 
+		vueEditerLivre.afficherListePrix(listePrix);
 		
 		
 	}

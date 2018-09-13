@@ -54,34 +54,7 @@ public class VueEditerLivre extends Scene{
 		grilleLivre.add(new Label("Style : "), 0, 2);
 		grilleLivre.add(valeurStyle, 1, 2);	
 		
-		Prix prix;
-		List<Prix> listePrix = new ArrayList<Prix>();
-		prix = new Prix("Prix d'écriture", "1960");
-		listePrix.add(prix);
-		prix = new Prix("Prix de style", "1960");
-		listePrix.add(prix);
-		prix = new Prix("Prix de la comédie", "1960");
-		listePrix.add(prix);
-		prix = new Prix("Prix de la couveture", "1960");
-		listePrix.add(prix);
 		
-		 compteur = 0;
-		 for(Prix prixCompteur : listePrix) {
-			 grilleListePrix.add(new Label(""+prixCompteur.getNom()),0,compteur);
-			 grilleListePrix.add(new Label(""+prixCompteur.getPromotion()),1,compteur);
-			 grilleListePrix.add(new Button ("Editer"), 2, compteur);
-			 grilleListePrix.add(new Button ("Effacer"), 3, compteur);
-			 compteur++;
-			 
-		 }
-		
-		
-		
-		
-		grilleListePrix.add(new Label("Prix d'écriture"), 0, 0);
-		grilleListePrix.add(new Label("Prix de style"), 0, 1);
-		grilleListePrix.add(new Label("Prix de la comédie "), 0, 2);
-		grilleListePrix.add(new Label("Prix de la couvertur"), 0, 3);
 		
 		panneau.getChildren().add(new Label("Editer un livre")); 
 		panneau.getChildren().add(grilleLivre);
@@ -110,6 +83,19 @@ public class VueEditerLivre extends Scene{
 	
 	public void setControleur(ControleurLivre controleur) {
 		this.controleur = controleur;
+	}
+	
+	public void afficherListePrix(List<Prix> listePrix) {
+		compteur = 0;
+		 for(Prix prixCompteur : listePrix) {
+			 grilleListePrix.add(new Label(""+prixCompteur.getNom()),0,compteur);
+			 grilleListePrix.add(new Label(""+prixCompteur.getPromotion()),1,compteur);
+			 grilleListePrix.add(new Button ("Editer"), 2, compteur);
+			 grilleListePrix.add(new Button ("Effacer"), 3, compteur);
+			 compteur++;
+			 
+		 }
+		
 	}
 
 }
