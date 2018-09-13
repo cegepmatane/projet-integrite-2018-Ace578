@@ -68,7 +68,7 @@ public class ControleurLivre {
 		
 		
 		prixDAO = new PrixDAO();
-		vueEditerLivre.afficherListePrix(prixDAO.simulerListePrix());
+		vueEditerLivre.afficherListePrix(prixDAO.listerPrix());
 		
 		
 	}

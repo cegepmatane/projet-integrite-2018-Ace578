@@ -2,10 +2,13 @@ package accesseur;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import modele.Livre;
 import modele.Prix;
 
 public class PrixDAO {
@@ -33,6 +36,32 @@ public class PrixDAO {
 			e.printStackTrace();
 		}
 	 
+	}
+	
+	public List<Prix> listerPrix() {
+		List<Prix> listePrix = new ArrayList<Prix>();
+		try {
+			
+			
+			Statement requeteListePrix = connection.createStatement();
+			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix WHERE livre = 1");
+			while (curseurListePrix.next()) {
+				int id = curseurListePrix.getInt("id");
+				String nom = curseurListePrix.getString("nom");
+				String promotion = curseurListePrix.getString("promotion");
+				String description = curseurListePrix.getString("description");
+				
+				Prix prix = new Prix(nom, promotion);
+				prix.setDescription(description);
+				prix.setId(id);
+				listePrix.add(prix);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return this.simulerListerLivres();
+		return listePrix;
 	}
 	
 	public List<Prix> simulerListePrix(){
