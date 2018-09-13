@@ -38,13 +38,13 @@ public class PrixDAO {
 	 
 	}
 	
-	public List<Prix> listerPrix() {
+	public List<Prix> listerPrix(int idLivre) {
 		List<Prix> listePrix = new ArrayList<Prix>();
 		try {
 			
 			
 			Statement requeteListePrix = connection.createStatement();
-			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix WHERE livre = 1");
+			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix WHERE livre = "+idLivre);
 			while (curseurListePrix.next()) {
 				int id = curseurListePrix.getInt("id");
 				String nom = curseurListePrix.getString("nom");

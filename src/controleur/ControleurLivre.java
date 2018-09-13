@@ -68,7 +68,7 @@ public class ControleurLivre {
 		
 		
 		prixDAO = new PrixDAO();
-		vueEditerLivre.afficherListePrix(prixDAO.listerPrix());
+		
 		
 		
 	}
@@ -98,7 +98,7 @@ public class ControleurLivre {
 	
 	public void notifierNaviguerEditerLivre(int idLivre) {
 		System.out.println("ControleurLivre.notifierNaviguerEditerLivre("+idLivre+")");
-		
+		vueEditerLivre.afficherListePrix(prixDAO.listerPrix(1));
 		this.vueEditerLivre.afficherLivre(this.livreDAO.rapporterLivre(idLivre));
 		this.navigateur.naviguerVersVueEditerLivre();
 	}
