@@ -90,6 +90,42 @@ ALTER SEQUENCE livre_id_seq OWNED BY livre.id;
 
 
 --
+-- Name: prix; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE prix (
+    id integer NOT NULL,
+    nom text,
+    promotion text,
+    description text,
+    livre integer
+);
+
+
+ALTER TABLE prix OWNER TO postgres;
+
+--
+-- Name: prix_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE prix_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE prix_id_seq OWNER TO postgres;
+
+--
+-- Name: prix_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE prix_id_seq OWNED BY prix.id;
+
+
+--
 -- Name: livre id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -97,12 +133,19 @@ ALTER TABLE ONLY livre ALTER COLUMN id SET DEFAULT nextval('livre_id_seq'::regcl
 
 
 --
+-- Name: prix id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prix ALTER COLUMN id SET DEFAULT nextval('prix_id_seq'::regclass);
+
+
+--
 -- Data for Name: livre; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO livre VALUES (2, 'La ferme des animaux', '1945', 'Apologue');
 INSERT INTO livre VALUES (1, 'Le seigneur des Anneaux', '1954', 'Fantasy');
 INSERT INTO livre VALUES (3, 'Le vieil homme et la mer', '1952', 'Fiction');
+INSERT INTO livre VALUES (2, 'La ferme des animaux', '1945', 'Apologue');
 
 
 --
@@ -113,11 +156,47 @@ SELECT pg_catalog.setval('livre_id_seq', 1, false);
 
 
 --
+-- Data for Name: prix; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: prix_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('prix_id_seq', 1, false);
+
+
+--
 -- Name: livre livre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY livre
     ADD CONSTRAINT livre_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: prix prix_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prix
+    ADD CONSTRAINT prix_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fki_one_livre_to_many_prix; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_one_livre_to_many_prix ON prix USING btree (livre);
+
+
+--
+-- Name: prix one_livre_to_many_prix; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prix
+    ADD CONSTRAINT one_livre_to_many_prix FOREIGN KEY (livre) REFERENCES livre(id);
 
 
 --
