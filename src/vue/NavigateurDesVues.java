@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import controleur.ControleurLivre;
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Livre;
@@ -50,6 +51,15 @@ public class NavigateurDesVues extends Application{
 		this.vueListeLivre.setControleur(controleurLivre);		
 		this.vueAjouterLivre.setControleur(controleurLivre);
 		this.vueEditerLivre.setControleur(controleurLivre);
+		
+		ControleurPrix controleurPrix = ControleurPrix.getInstance();
+		controleurPrix.activerVues(this);
+		this.vuePrix.setControleur(controleurPrix);
+		this.vueListePrix.setControleur(controleurPrix);		
+		this.vueAjouterPrix.setControleur(controleurPrix);
+		this.vueEditerPrix.setControleur(controleurPrix);
+		
+		
 		
 	}
 	

@@ -26,6 +26,16 @@ public class ControleurPrix {
 		this.prixDAO = new PrixDAO();
 	}
 	
+	private static ControleurPrix instance = null; 
+	
+	public static ControleurPrix getInstance() {
+		
+		if(instance==null) {
+			instance = new ControleurPrix();
+		}
+		return instance;
+	} 
+	
 	public void activerVues(NavigateurDesVues navigateur) {
 		
 		
@@ -35,6 +45,14 @@ public class ControleurPrix {
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
 
+	}
+	
+	public void notifierEnregistrerPrix() {
+		System.out.println("ControleurPrix.notifierEnregistrerPrix()");
+		Prix Prix = this.navigateur.getVueEditerPrix().demanderPrix();
+		this.prixDAO.modifierPrix(Prix);
+		this.navigateur.naviguerVersVueListePrix();
+		
 	}
 	
 	

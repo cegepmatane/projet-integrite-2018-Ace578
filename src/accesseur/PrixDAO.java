@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.Livre;
+import modele.Prix;
 import modele.Prix;
 
 public class PrixDAO {
@@ -38,13 +38,13 @@ public class PrixDAO {
 	 
 	}
 	
-	public List<Prix> listerPrix(int idLivre) {
+	public List<Prix> listerPrix(int idPrix) {
 		List<Prix> listePrix = new ArrayList<Prix>();
 		try {
 			
 			
 			Statement requeteListePrix = connection.createStatement();
-			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix WHERE livre = "+idLivre);
+			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix WHERE id = "+idPrix);
 			while (curseurListePrix.next()) {
 				int id = curseurListePrix.getInt("id");
 				String nom = curseurListePrix.getString("nom");
@@ -60,8 +60,22 @@ public class PrixDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//return this.simulerListerLivres();
+		//return this.simulerListerPrixs();
 		return listePrix;
+	}
+	
+	public void modifierPrix(Prix prix) {
+		System.out.println("PrixDAO.modifierPrix()");
+		
+		try {
+			Statement requeteModifierPrix = connection.createStatement();
+			String SQL_MODIFIER_PRIX = "UPDATE prix SET nom ='"+prix.getNom()+"', promotion ='"+prix.getPromotion()+"', description ='"+prix.getDescription()+"'WHERE id ="+prix.getId();
+			requeteModifierPrix.execute(SQL_MODIFIER_PRIX);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public List<Prix> simulerListePrix(){

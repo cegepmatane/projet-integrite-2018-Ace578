@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +17,7 @@ public class VueEditerPrix extends Scene {
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
 	protected GridPane grillePrix;
+	private ControleurPrix controleur;
 	
 	public VueEditerPrix() {
 		
@@ -56,7 +58,9 @@ public class VueEditerPrix extends Scene {
 	}
 
 	
-	
+	public void setControleur(ControleurPrix controleur) {
+		this.controleur = controleur;
+	}
 	
 	
 }

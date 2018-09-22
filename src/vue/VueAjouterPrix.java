@@ -1,5 +1,7 @@
 package vue;
 
+import controleur.ControleurLivre;
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ public class VueAjouterPrix extends Scene{
 	protected TextField valeurNom;
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
+	private ControleurPrix controleur;
 	
 	
 	public VueAjouterPrix() {
@@ -46,5 +49,9 @@ public class VueAjouterPrix extends Scene{
 								valeurPromotion.getText()); 
 				
 		return Prix;
+	}
+	
+	public void setControleur(ControleurPrix controleur) {
+		this.controleur = controleur;
 	}
 }

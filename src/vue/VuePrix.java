@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ public class VuePrix extends Scene  {
 	protected Label idPromotion;
 	protected Label valeurDescription;
 	protected Label idDescription;
+	private ControleurPrix controleur;
 	
 	
 	public VuePrix() {
@@ -52,6 +54,10 @@ public class VuePrix extends Scene  {
 		this.valeurPromotion.setText(Prix.getPromotion());
 		this.valeurDescription.setText(Prix.getDescription());
 		
+	}
+	
+	public void setControleur(ControleurPrix controleur) {
+		this.controleur = controleur;
 	}
 	
 	

@@ -2,6 +2,8 @@ package vue;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ import modele.Prix;
 
 public class VueListePrix extends Scene {
 	protected GridPane grillePrix;
+	private ControleurPrix controleur;
 	
 	public VueListePrix() {
 		super(new VBox(), 400, 400);
@@ -46,5 +49,9 @@ public class VueListePrix extends Scene {
 			this.grillePrix.add(new Label(Prix.getNom()), 0, numero);
 			this.grillePrix.add(new Label(Prix.getPromotion()), 1, numero);			
 		}
+	}
+	
+	public void setControleur(ControleurPrix controleur) {
+		this.controleur = controleur;
 	}
 }
