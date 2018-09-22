@@ -2,6 +2,7 @@ package vue;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import controleur.ControleurLivre;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -43,12 +44,12 @@ public class NavigateurDesVues extends Application{
 		stade.setScene(null);
 		stade.show();
 		
-		ControleurLivre controleur = ControleurLivre.getInstance();
-		controleur.activerVues(this);
-		this.vueLivre.setControleur(controleur);
-		this.vueListeLivre.setControleur(controleur);		
-		this.vueAjouterLivre.setControleur(controleur);
-		this.vueEditerLivre.setControleur(controleur);
+		ControleurLivre controleurLivre = ControleurLivre.getInstance();
+		controleurLivre.activerVues(this);
+		this.vueLivre.setControleur(controleurLivre);
+		this.vueListeLivre.setControleur(controleurLivre);		
+		this.vueAjouterLivre.setControleur(controleurLivre);
+		this.vueEditerLivre.setControleur(controleurLivre);
 		
 	}
 	
