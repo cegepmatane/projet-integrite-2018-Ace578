@@ -88,6 +88,42 @@ public class NavigateurDesVues extends Application{
 		stade.show();
 	}
 	
+	public VueAjouterPrix getVueAjouterPrix() {
+		return vueAjouterPrix;
+	}
+
+	public VueListePrix getVueListePrix() {
+		return vueListePrix;
+	}
+
+	public VuePrix getVuePrix() {
+		return vuePrix;
+	}
+	
+	public VueEditerPrix getVueEditerPrix() {
+		return vueEditerPrix;
+	}
+	
+	public void naviguerVersVuePrix() {
+		stade.setScene(this.vuePrix);
+		stade.show();
+	}
+	
+	public void naviguerVersVueAjouterPrix() {
+		stade.setScene(this.vueAjouterPrix);
+		stade.show();
+	}
+	
+	public void naviguerVersVueListePrix() {
+		stade.setScene(this.vueListePrix);
+		stade.show();
+	}
+	
+	public void naviguerVersVueEditerPrix() {
+		stade.setScene(this.vueEditerPrix);
+		stade.show();
+	}
+	
 	
 	
 }
