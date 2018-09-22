@@ -11,18 +11,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modele.Prix;
-public class VueEditerPrix extends Application {
+public class VueEditerPrix extends Scene {
 	protected TextField valeurNom;
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
+	protected GridPane grillePrix;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
+	public VueEditerPrix() {
 		
 		
-		VBox panneau = new VBox();	
-		GridPane grillePrix = new GridPane();
+		super(new VBox(), 400, 400);
+		VBox panneau = (VBox) this.getRoot();
 		Button actionEnregistrerPrix = new Button("Enregistrer");
+		grillePrix = new GridPane();
 		
 		
 		
@@ -43,8 +44,7 @@ public class VueEditerPrix extends Application {
 		panneau.getChildren().add(new Label("Editer un Prix")); 
 		panneau.getChildren().add(grillePrix);
 		panneau.getChildren().add(actionEnregistrerPrix);
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();
+		
 	}
 	
 	public Prix demanderPrix()

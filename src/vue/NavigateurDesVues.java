@@ -14,6 +14,10 @@ public class NavigateurDesVues extends Application{
 	private VueLivre vueLivre;
 	private VueEditerLivre vueEditerLivre;
 	private Stage stade;
+	private VueAjouterPrix vueAjouterPrix;
+	private VueListePrix vueListePrix;
+	private VueEditerPrix vueEditerPrix;
+	private VuePrix vuePrix;
 	
 	
 	
@@ -24,7 +28,10 @@ public class NavigateurDesVues extends Application{
 		this.vueLivre = new VueLivre();	
 		this.vueAjouterLivre = new VueAjouterLivre();
 		this.vueEditerLivre = new VueEditerLivre();
-		
+		this.vueAjouterPrix = new VueAjouterPrix();
+		this.vueListePrix = new VueListePrix();
+		this.vueEditerPrix = new VueEditerPrix();
+		this.vuePrix = new VuePrix();
 		
 		
 	}

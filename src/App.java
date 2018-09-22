@@ -9,8 +9,8 @@ import vue.VueLivre;
 public class App {
 
 	public static void main(String[] parametres) {
-		//NavigateurDesVues.launch(NavigateurDesVues.class,parametres);
-		VueEditerPrix.launch(VueEditerPrix.class, parametres);
+		NavigateurDesVues.launch(NavigateurDesVues.class,parametres);
+		
 
 	}
 

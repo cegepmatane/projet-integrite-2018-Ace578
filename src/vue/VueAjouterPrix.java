@@ -10,15 +10,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modele.Prix;
-public class VueAjouterPrix extends Application{
+public class VueAjouterPrix extends Scene{
 	protected TextField valeurNom;
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
 	
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		VBox panneau = new VBox();	
+	public VueAjouterPrix() {
+		super(new VBox(), 400, 400);
+		VBox panneau = (VBox) this.getRoot();	
 		GridPane grillePrix = new GridPane();
 		
 		valeurNom = new TextField();
@@ -37,8 +37,7 @@ public class VueAjouterPrix extends Application{
 		panneau.getChildren().add(new Label("Ajouter un Prix")); 
 		panneau.getChildren().add(grillePrix);
 		panneau.getChildren().add(new Button("Enregistrer"));
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();		
+				
 	}
 	
 	public Prix demanderPrix()
