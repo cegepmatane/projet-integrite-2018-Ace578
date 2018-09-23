@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import modele.Livre;
 import modele.Prix;
 import modele.Prix;
 
@@ -76,6 +77,33 @@ public class PrixDAO {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public Prix rapporterPrix(int idPrix) {
+		Statement requetePrix;
+		
+		try {
+			requetePrix = connection.createStatement();
+			String SQL_RAPPORTER_PRIX = "SELECT * FROM prix WHERE id ="+idPrix;
+			System.out.println(SQL_RAPPORTER_PRIX);
+			ResultSet curseurPrix = requetePrix.executeQuery(SQL_RAPPORTER_PRIX);
+			curseurPrix.next();
+			int id = curseurPrix.getInt("id");
+			String nom = curseurPrix.getString("nom");
+			String promotion = curseurPrix.getString("promotion");
+			String description = curseurPrix.getString("description");
+			
+			Prix Prix = new Prix(nom, promotion);
+			Prix.setId(id);
+			return Prix;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
 	}
 	
 	public List<Prix> simulerListePrix(){

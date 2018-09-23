@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controleur.ControleurLivre;
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +22,8 @@ public class VueListeLivre extends Scene {
 	protected GridPane grilleLivres;
 	private ControleurLivre controleur = null;
 	private Button actionNaviguerAjouterLivre;
-	
+	private Button actionNaviguerListePrix;
+	private ControleurPrix controleurPrix = null;
 	public VueListeLivre() {
 		
 		super(new GridPane(), 400, 400);
@@ -29,7 +31,7 @@ public class VueListeLivre extends Scene {
 		grilleLivres = new GridPane();
 		panneau.getChildren().add(grilleLivres);
 		this.actionNaviguerAjouterLivre = new Button("Ajouter un livre");
-			
+		this.actionNaviguerListePrix = new Button("Voir liste des prix");
 		
 		
 	
@@ -72,6 +74,18 @@ public class VueListeLivre extends Scene {
 		});
 		
 		this.grilleLivres.add(this.actionNaviguerAjouterLivre, 1, ++numero);
+		
+		this.actionNaviguerListePrix.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				controleurPrix.notifierNaviguerListePrix();
+				
+			}
+			
+		});
+		
+		this.grilleLivres.add(this.actionNaviguerListePrix, 1, ++numero);
 	
 
 	}

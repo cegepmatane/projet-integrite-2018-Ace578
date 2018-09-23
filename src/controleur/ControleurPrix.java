@@ -44,6 +44,8 @@ public class ControleurPrix {
 		this.vueListePrix = this.navigateur.getVueListePrix();
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
+		
+		navigateur.naviguerVersVueEditerPrix();
 
 	}
 	
@@ -53,6 +55,16 @@ public class ControleurPrix {
 		this.prixDAO.modifierPrix(Prix);
 		this.navigateur.naviguerVersVueListePrix();
 		
+	}
+	
+	public void notifierNaviguerEditerPrix(int idPrix) {
+		System.out.println("ControleurPrix.notifierNaviguerEditerPrix("+idPrix+")");
+		this.vueEditerPrix.afficherPrix(this.prixDAO.rapporterPrix(idPrix));
+		this.navigateur.naviguerVersVueEditerPrix();
+	}
+	
+	public void notifierNaviguerListePrix() {
+		this.navigateur.naviguerVersVueListePrix();
 	}
 	
 	

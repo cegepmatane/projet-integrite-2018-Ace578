@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controleur.ControleurLivre;
+import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +28,8 @@ public class VueEditerLivre extends Scene{
 	private int idLivre = 0;
 	protected GridPane grilleListePrix = new GridPane();
 	private int compteur;
+	protected Button actionEditerPrix = null;
+	private ControleurPrix controleurPrix = null;
 
 	public VueEditerLivre() {
 		super(new VBox(), 400, 400);
@@ -40,6 +43,8 @@ public class VueEditerLivre extends Scene{
 				controleur.notifierEnregistrerLivre();
 			
 		}});
+		
+		
 
 		
 		valeurTitre = new TextField();
@@ -86,16 +91,28 @@ public class VueEditerLivre extends Scene{
 	}
 	
 	public void afficherListePrix(List<Prix> listePrix) {
+		
 		compteur = 0;
 		 for(Prix prixCompteur : listePrix) {
+			 this.actionEditerPrix = new Button("Editer");
+				this.actionEditerPrix.setOnAction(new EventHandler<ActionEvent>() {
+					
+					public void handle(ActionEvent arg0) {
+						
+						controleurPrix.notifierNaviguerEditerPrix(prixCompteur.getId());
+					
+				}});;
 			 grilleListePrix.add(new Label(""+prixCompteur.getNom()),0,compteur);
 			 grilleListePrix.add(new Label(""+prixCompteur.getPromotion()),1,compteur);
-			 grilleListePrix.add(new Button ("Editer"), 2, compteur);
+			 grilleListePrix.add(actionEditerPrix, 2, compteur);
 			 grilleListePrix.add(new Button ("Effacer"), 3, compteur);
 			 compteur++;
 			 
 		 }
 		
 	}
+	
+	
+	
 
 }

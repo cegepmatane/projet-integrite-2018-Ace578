@@ -11,20 +11,30 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modele.Livre;
 import modele.Prix;
 public class VueEditerPrix extends Scene {
 	protected TextField valeurNom;
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
+	private int idPrix = 0;
 	protected GridPane grillePrix;
 	private ControleurPrix controleur;
+	private Button actionEnregistrerPrix;
 	
 	public VueEditerPrix() {
 		
 		
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
-		Button actionEnregistrerPrix = new Button("Enregistrer");
+		actionEnregistrerPrix = new Button("Enregistrer");
+		actionEnregistrerPrix.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierEnregistrerPrix();
+			
+		}});
 		grillePrix = new GridPane();
 		
 		
@@ -60,6 +70,13 @@ public class VueEditerPrix extends Scene {
 	
 	public void setControleur(ControleurPrix controleur) {
 		this.controleur = controleur;
+	}
+	
+	public void afficherPrix(Prix prix) {
+		this.idPrix = prix.getId();
+		this.valeurNom.setText(prix.getNom());
+		this.valeurPromotion.setText(prix.getPromotion());
+		this.valeurDescription.setText(prix.getDescription());
 	}
 	
 	
