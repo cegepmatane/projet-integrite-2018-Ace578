@@ -93,9 +93,10 @@ public class PrixDAO {
 			String promotion = curseurPrix.getString("promotion");
 			String description = curseurPrix.getString("description");
 			
-			Prix Prix = new Prix(nom, promotion);
-			Prix.setId(id);
-			return Prix;
+			Prix prix = new Prix(nom, promotion);
+			prix.setDescription(description);
+			prix.setId(id);
+			return prix;
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

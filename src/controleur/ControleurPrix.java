@@ -46,7 +46,7 @@ public class ControleurPrix {
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
 		
-		navigateur.naviguerVersVueAjouterPrix();
+		//navigateur.naviguerVersVueAjouterPrix();
 
 	}
 	
