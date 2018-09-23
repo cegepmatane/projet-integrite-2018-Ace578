@@ -74,6 +74,11 @@ public class ControleurPrix {
 		this.navigateur.naviguerVersVueEditerPrix();
 	}
 	
+	public void notifierNaviguerAjouterPrix() {
+		System.out.println("ControleurLivre.notifierNaviguerAjouterPrix()");
+		this.navigateur.naviguerVersVueAjouterPrix();
+	}
+	
 	public void notifierNaviguerListePrix() {
 		this.navigateur.naviguerVersVueListePrix();
 	}

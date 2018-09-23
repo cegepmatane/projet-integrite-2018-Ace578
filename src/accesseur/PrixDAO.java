@@ -110,7 +110,7 @@ public class PrixDAO {
 		System.out.println("PrixDAO.ajouterPrix()");
 		try {
 			Statement requeteAjouterPrix = connection.createStatement();
-			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description) VALUES ('"+prix.getNom()+"','"+prix.getPromotion()+"','"+prix.getDescription()+"')";
+			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description, livre) VALUES ('"+prix.getNom()+"','"+prix.getPromotion()+"','"+prix.getDescription()+"','"+"2"+"')";
 			System.out.println("SQL : " +SQL_AJOUTER_PRIX);
 			requeteAjouterPrix.executeQuery(SQL_AJOUTER_PRIX);
 		} catch (SQLException e) {

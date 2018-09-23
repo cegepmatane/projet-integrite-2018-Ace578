@@ -5,7 +5,10 @@ import java.util.List;
 
 import controleur.ControleurPrix;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -16,15 +19,25 @@ import modele.Prix;
 public class VueListePrix extends Scene {
 	protected GridPane grillePrix;
 	private ControleurPrix controleur;
+	private Button actionNaviguerVersAjouter;
 	
 	
 	public VueListePrix() {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		grillePrix = new GridPane();
+		actionNaviguerVersAjouter = new Button ("Ajouter un prix");
+		actionNaviguerVersAjouter.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierNaviguerAjouterPrix();
+			
+		}});
 		
 		
 		panneau.getChildren().add(grillePrix);
+		panneau.getChildren().add(actionNaviguerVersAjouter);
 				
 		
 		/// TEST ///
