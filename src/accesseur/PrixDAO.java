@@ -84,7 +84,7 @@ public class PrixDAO {
 		
 		try {
 			requetePrix = connection.createStatement();
-			String SQL_RAPPORTER_PRIX = "SELECT * FROM prix WHERE id ="+idPrix;
+			String SQL_RAPPORTER_PRIX = "SELECT * FROM prix WHERE livre ="+idPrix;
 			System.out.println(SQL_RAPPORTER_PRIX);
 			ResultSet curseurPrix = requetePrix.executeQuery(SQL_RAPPORTER_PRIX);
 			curseurPrix.next();
@@ -104,6 +104,21 @@ public class PrixDAO {
 		
 		
 		return null;
+	}
+	
+	public void ajouterPrix(Prix prix) {
+		System.out.println("PrixDAO.ajouterPrix()");
+		try {
+			Statement requeteAjouterPrix = connection.createStatement();
+			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description) VALUES ('"+prix.getNom()+"','"+prix.getPromotion()+"','"+prix.getDescription()+"')";
+			System.out.println("SQL : " +SQL_AJOUTER_PRIX);
+			requeteAjouterPrix.executeQuery(SQL_AJOUTER_PRIX);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public List<Prix> simulerListePrix(){

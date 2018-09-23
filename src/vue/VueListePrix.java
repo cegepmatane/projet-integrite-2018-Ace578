@@ -17,6 +17,7 @@ public class VueListePrix extends Scene {
 	protected GridPane grillePrix;
 	private ControleurPrix controleur;
 	
+	
 	public VueListePrix() {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();

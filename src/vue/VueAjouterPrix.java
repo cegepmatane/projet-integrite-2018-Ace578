@@ -3,6 +3,8 @@ package vue;
 import controleur.ControleurLivre;
 import controleur.ControleurPrix;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,12 +19,21 @@ public class VueAjouterPrix extends Scene{
 	protected TextField valeurPromotion;
 	protected TextField valeurDescription;
 	private ControleurPrix controleur;
+	protected Button actionAjouterPrix;
 	
 	
 	public VueAjouterPrix() {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();	
 		GridPane grillePrix = new GridPane();
+		actionAjouterPrix = new Button("Enregistrer");
+		actionAjouterPrix.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierAjouterPrix();
+			
+		}});
 		
 		valeurNom = new TextField();
 		grillePrix.add(new Label("Nom : "), 0, 0);
@@ -39,7 +50,7 @@ public class VueAjouterPrix extends Scene{
 		
 		panneau.getChildren().add(new Label("Ajouter un Prix")); 
 		panneau.getChildren().add(grillePrix);
-		panneau.getChildren().add(new Button("Enregistrer"));
+		panneau.getChildren().add(actionAjouterPrix);
 				
 	}
 	

@@ -3,6 +3,7 @@ import java.util.List;
 
 import accesseur.PrixDAO;
 import accesseur.PrixDAO;
+import modele.Livre;
 import modele.Prix;
 import modele.Prix;
 import vue.NavigateurDesVues;
@@ -45,7 +46,7 @@ public class ControleurPrix {
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
 		
-		navigateur.naviguerVersVueEditerPrix();
+		navigateur.naviguerVersVueAjouterPrix();
 
 	}
 	
@@ -53,6 +54,16 @@ public class ControleurPrix {
 		System.out.println("ControleurPrix.notifierEnregistrerPrix()");
 		Prix Prix = this.navigateur.getVueEditerPrix().demanderPrix();
 		this.prixDAO.modifierPrix(Prix);
+		this.navigateur.naviguerVersVueListePrix();
+		
+	}
+	
+	
+	public void notifierAjouterPrix () {
+		System.out.println("ControleurPrix.notifierEnregistrerNouveauPrix()");
+		Prix Prix = this.navigateur.getVueAjouterPrix().demanderPrix();
+		this.prixDAO.ajouterPrix(Prix);
+		this.vueListePrix.afficherListePrix(this.prixDAO.listerPrix(1));
 		this.navigateur.naviguerVersVueListePrix();
 		
 	}
