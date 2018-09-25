@@ -46,7 +46,10 @@ public class ControleurPrix {
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
 		
-		//navigateur.naviguerVersVueAjouterPrix();
+		List<Prix> listeLivresTest = prixDAO.listerTousPrix();
+		this.vueListePrix.afficherListePrix(listeLivresTest);
+		
+		//navigateur.naviguerVersVueListePrix();
 
 	}
 	
@@ -63,7 +66,7 @@ public class ControleurPrix {
 		System.out.println("ControleurPrix.notifierEnregistrerNouveauPrix()");
 		Prix Prix = this.navigateur.getVueAjouterPrix().demanderPrix();
 		this.prixDAO.ajouterPrix(Prix);
-		this.vueListePrix.afficherListePrix(this.prixDAO.listerPrix(1));
+		this.vueListePrix.afficherListePrix(this.prixDAO.listerTousPrix());
 		this.navigateur.naviguerVersVueListePrix();
 		
 	}
@@ -72,6 +75,7 @@ public class ControleurPrix {
 		System.out.println("ControleurPrix.notifierNaviguerEditerPrix("+idPrix+")");
 		this.vueEditerPrix.afficherPrix(this.prixDAO.rapporterPrix(idPrix));
 		this.navigateur.naviguerVersVueEditerPrix();
+		
 	}
 	
 	public void notifierNaviguerAjouterPrix() {
@@ -81,6 +85,10 @@ public class ControleurPrix {
 	
 	public void notifierNaviguerListePrix() {
 		this.navigateur.naviguerVersVueListePrix();
+	}
+	
+	public void notifierNaviguerListeLivre() {
+		this.navigateur.naviguerVersVueListeLivre();
 	}
 	
 	

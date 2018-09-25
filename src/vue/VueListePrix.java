@@ -20,6 +20,7 @@ public class VueListePrix extends Scene {
 	protected GridPane grillePrix;
 	private ControleurPrix controleur;
 	private Button actionNaviguerVersAjouter;
+	private Button actionNaviguerVersAccueil;
 	
 	
 	public VueListePrix() {
@@ -35,18 +36,32 @@ public class VueListePrix extends Scene {
 			
 		}});
 		
+		actionNaviguerVersAccueil = new Button ("Retour aux livres");
+		actionNaviguerVersAccueil.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierNaviguerListeLivre();
+			
+		}});
+		
 		
 		panneau.getChildren().add(grillePrix);
 		panneau.getChildren().add(actionNaviguerVersAjouter);
+		panneau.getChildren().add(actionNaviguerVersAccueil);
 				
 		
+		/**
 		/// TEST ///
 		List listePrixTest = new ArrayList<Prix>();
 		listePrixTest.add(new Prix("Livre le plus comique","1960"));
 		listePrixTest.add(new Prix("Livre le plus beau","1970"));
 		listePrixTest.add(new Prix("Livre le plus angoissant","1980"));
 		listePrixTest.add(new Prix("Livre le plus effrayant","1990"));
+		System.out.println(listePrixTest);
+		
 		this.afficherListePrix(listePrixTest); 
+		*/
 		
 		
 	}

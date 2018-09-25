@@ -10,6 +10,7 @@ import modele.Prix;
 import vue.NavigateurDesVues;
 import vue.VueAjouterLivre;
 import vue.VueEditerLivre;
+import vue.VueEditerPrix;
 import vue.VueListeLivre;
 import vue.VueLivre;
 
@@ -21,6 +22,7 @@ public class ControleurLivre {
 	private VueListeLivre vueListeLivre = null;
 	private VueAjouterLivre vueAjouterLivre = null;
 	private VueEditerLivre vueEditerLivre = null;
+	
 	private LivreDAO livreDAO = null;
 	private PrixDAO prixDAO = null;
 	
@@ -98,9 +100,11 @@ public class ControleurLivre {
 	
 	public void notifierNaviguerEditerLivre(int idLivre) {
 		System.out.println("ControleurLivre.notifierNaviguerEditerLivre("+idLivre+")");
-		vueEditerLivre.afficherListePrix(prixDAO.listerPrix(1));
 		this.vueEditerLivre.afficherLivre(this.livreDAO.rapporterLivre(idLivre));
 		this.navigateur.naviguerVersVueEditerLivre();
+		vueEditerLivre.afficherListePrix(prixDAO.listerPrix(idLivre));
+		
+		
 	}
 	
 }

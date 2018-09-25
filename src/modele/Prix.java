@@ -9,10 +9,11 @@ public class Prix {
 	
 	
 	
-	public Prix(String nom, String promotion) {
+	public Prix(String nom, String promotion, String description) {
 		super();
 		this.nom = nom;
 		this.promotion = promotion;
+		this.description = description;
 	}
 	
 	public Prix() {

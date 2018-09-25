@@ -1,5 +1,7 @@
 package vue;
 
+import java.util.List;
+
 import controleur.ControleurPrix;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -62,7 +64,8 @@ public class VueEditerPrix extends Scene {
 	public Prix demanderPrix()
 	{
 		Prix Prix = new Prix(valeurNom.getText(), 
-								valeurPromotion.getText()); 
+								valeurPromotion.getText(),
+									valeurDescription.getText()); 
 								
 		return Prix;
 	}
@@ -79,5 +82,30 @@ public class VueEditerPrix extends Scene {
 		this.valeurDescription.setText(prix.getDescription());
 	}
 	
+	/**
+	public void afficherListePrix(List<Prix> listePrix) {
+		this.grillePrix.getChildren().clear();
+		int compteur = 0;
+		 for(Prix prixCompteur : listePrix) {
+			 this.actionEnregistrerPrix = new Button("Enregistrer");
+				this.actionEnregistrerPrix.setOnAction(new EventHandler<ActionEvent>() {
+					
+					public void handle(ActionEvent arg0) {
+						
+						controleur.notifierNaviguerEditerPrix(prixCompteur.getId());
+					
+				}});;
+			 grillePrix.add(new Label(""+prixCompteur.getNom()),0,compteur);
+			 grillePrix.add(new Label(""+prixCompteur.getPromotion()),1,compteur);
+			 grillePrix.add(actionEnregistrerPrix, 2, compteur);
+			 grillePrix.add(new Button ("Effacer"), 3, compteur);
+			 compteur++;
+			 
+		 }
+		 
+		
+	}
+	
+		 */
 	
 }

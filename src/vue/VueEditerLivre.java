@@ -90,8 +90,13 @@ public class VueEditerLivre extends Scene{
 		this.controleur = controleur;
 	}
 	
+	public void setControleurPrix(ControleurPrix controleurPrix) {
+		this.controleurPrix = controleurPrix;
+	}
+	
+	
 	public void afficherListePrix(List<Prix> listePrix) {
-		
+		this.grilleListePrix.getChildren().clear();
 		compteur = 0;
 		 for(Prix prixCompteur : listePrix) {
 			 this.actionEditerPrix = new Button("Editer");

@@ -94,4 +94,8 @@ public class VueListeLivre extends Scene {
 		this.controleur = controleur;
 	}
 	
+	public void setControleurPrix(ControleurPrix controleurPrix) {
+		this.controleurPrix = controleurPrix;
+	}
+	
 }

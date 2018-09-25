@@ -52,8 +52,34 @@ public class PrixDAO {
 				String promotion = curseurListePrix.getString("promotion");
 				String description = curseurListePrix.getString("description");
 				
-				Prix prix = new Prix(nom, promotion);
-				prix.setDescription(description);
+				Prix prix = new Prix(nom, promotion, description);
+				
+				prix.setId(id);
+				listePrix.add(prix);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return this.simulerListerPrixs();
+		return listePrix;
+	}
+	
+	public List<Prix> listerTousPrix() {
+		List<Prix> listePrix = new ArrayList<Prix>();
+		try {
+			
+			
+			Statement requeteListePrix = connection.createStatement();
+			ResultSet curseurListePrix = requeteListePrix.executeQuery("SELECT * FROM prix");
+			while (curseurListePrix.next()) {
+				int id = curseurListePrix.getInt("id");
+				String nom = curseurListePrix.getString("nom");
+				String promotion = curseurListePrix.getString("promotion");
+				String description = curseurListePrix.getString("description");
+				
+				Prix prix = new Prix(nom, promotion, description);
+				
 				prix.setId(id);
 				listePrix.add(prix);
 			}
@@ -84,7 +110,7 @@ public class PrixDAO {
 		
 		try {
 			requetePrix = connection.createStatement();
-			String SQL_RAPPORTER_PRIX = "SELECT * FROM prix WHERE livre ="+idPrix;
+			String SQL_RAPPORTER_PRIX = "SELECT * FROM prix WHERE id ="+idPrix;
 			System.out.println(SQL_RAPPORTER_PRIX);
 			ResultSet curseurPrix = requetePrix.executeQuery(SQL_RAPPORTER_PRIX);
 			curseurPrix.next();
@@ -93,8 +119,8 @@ public class PrixDAO {
 			String promotion = curseurPrix.getString("promotion");
 			String description = curseurPrix.getString("description");
 			
-			Prix prix = new Prix(nom, promotion);
-			prix.setDescription(description);
+			Prix prix = new Prix(nom, promotion, description);
+			
 			prix.setId(id);
 			return prix;
 		} catch (SQLException e) {
@@ -122,6 +148,7 @@ public class PrixDAO {
 		
 	}
 	
+	/**
 	public List<Prix> simulerListePrix(){
 		Prix prix;
 		List<Prix> listePrix = new ArrayList<Prix>();
@@ -136,4 +163,7 @@ public class PrixDAO {
 		
 		return listePrix;
 	}
+	*/
+	
+	
 }

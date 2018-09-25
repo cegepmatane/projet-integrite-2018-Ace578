@@ -54,6 +54,8 @@ public class NavigateurDesVues extends Application{
 		
 		ControleurPrix controleurPrix = ControleurPrix.getInstance();
 		controleurPrix.activerVues(this);
+		this.vueEditerLivre.setControleurPrix(controleurPrix);
+		this.vueListeLivre.setControleurPrix(controleurPrix);
 		this.vuePrix.setControleur(controleurPrix);
 		this.vueListePrix.setControleur(controleurPrix);		
 		this.vueAjouterPrix.setControleur(controleurPrix);

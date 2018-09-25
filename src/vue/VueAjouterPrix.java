@@ -57,7 +57,8 @@ public class VueAjouterPrix extends Scene{
 	public Prix demanderPrix()
 	{
 		Prix Prix = new Prix(valeurNom.getText(), 
-								valeurPromotion.getText()); 
+								valeurPromotion.getText(),
+									valeurDescription.getText()); 
 				
 		return Prix;
 	}
