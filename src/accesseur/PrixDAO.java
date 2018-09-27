@@ -2,6 +2,7 @@ package accesseur;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -120,10 +121,12 @@ public class PrixDAO {
 	public void ajouterPrix(Prix prix) {
 		System.out.println("PrixDAO.ajouterPrix()");
 		try {
-			Statement requeteAjouterPrix = connection.createStatement();
-			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description, livre) VALUES ('"+prix.getNom()+"','"+prix.getPromotion()+"','"+prix.getDescription()+"','"+"2"+"')";
-			System.out.println("SQL : " +SQL_AJOUTER_PRIX);
-			requeteAjouterPrix.executeQuery(SQL_AJOUTER_PRIX);
+			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description) VALUES (?,?,?)";
+			PreparedStatement requeteAjouterPrix = connection.prepareStatement(SQL_AJOUTER_PRIX);
+			requeteAjouterPrix.setString(1, prix.getNom());
+			requeteAjouterPrix.setString(2, prix.getPromotion());
+			requeteAjouterPrix.setString(3, prix.getDescription());
+			requeteAjouterPrix.execute();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

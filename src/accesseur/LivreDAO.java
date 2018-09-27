@@ -2,6 +2,7 @@ package accesseur;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,10 +97,13 @@ public class LivreDAO {
 		public void ajouterLivre(Livre livre) {
 			System.out.println("LivreDAO.ajouterLivre()");
 			try {
-				Statement requeteAjouterLivre = connection.createStatement();
-				String sqlAjouterLivre = "INSERT into livre(titre, annee, style) VALUES ('"+livre.getTitre()+"','"+livre.getAnnee()+"','"+livre.getStyle()+"')";
-				System.out.println("SQL : " +sqlAjouterLivre);
-				requeteAjouterLivre.executeQuery(sqlAjouterLivre);
+				
+				String SQL_AJOUTER_LIVRE = "INSERT into livre(titre, annee, style) VALUES (?,?,?)";
+				PreparedStatement requeteAjouterLivre = connection.prepareStatement(SQL_AJOUTER_LIVRE);
+				requeteAjouterLivre.setString(1, livre.getTitre());
+				requeteAjouterLivre.setString(2, livre.getAnnee());
+				requeteAjouterLivre.setString(3, livre.getStyle());
+				requeteAjouterLivre.execute();
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
