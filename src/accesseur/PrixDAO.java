@@ -14,28 +14,12 @@ import modele.Prix;
 
 public class PrixDAO {
 
-	protected String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-	protected String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bibliotheque";
-	protected String BASEDEDONNEES_USAGER = "postgres";
-	protected String BASEDEDONNEES_MOTDEPASSE = "password";
+
 	private Connection connection = null;
 	
 	
 	public PrixDAO() {
-		try {
-			Class.forName(BASEDEDONNEES_DRIVER);
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		}
-		
-		
-		try {
-			connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+		this.connection = BaseDeDonnees.getInstance().getConnection();
 	 
 	}
 	
