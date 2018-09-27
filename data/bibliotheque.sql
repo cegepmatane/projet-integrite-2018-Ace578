@@ -63,9 +63,35 @@ CREATE FUNCTION journaliser() RETURNS trigger
     AS $$
 DECLARE	
 	description text;
+    objetAvant text;
+    objetApres text;
+    operation text;
 	BEGIN
-    description:='('||NEW.titre||')';
-    INSERT into journal(moment, operation, objet, description) VALUES (NOW(), 'AJOUTER', 'livre', description);
+    objetAvant='';
+    objetApres='';
+    operation='';
+    
+    
+    IF TG_OP = 'INSERT' THEN
+    	objetAvant ='()';
+        objetApres:='('||NEW.titre||','||NEW.annee||','||NEW.style||')';
+        operation='ajouter';
+    END IF;
+    
+    IF TG_OP = 'UPDATE' THEN
+    	objetAvant:='('||OLD.titre||','||OLD.annee||','||OLD.style||')';
+        objetApres:='('||NEW.titre||','||NEW.annee||','||NEW.style||')';
+        operation='modifier';
+    END IF;
+    
+    IF TG_OP = 'DELETE' THEN
+    	objetAvant:='('||OLD.titre||','||OLD.annee||','||OLD.style||')';
+        objetApres:='()';
+        operation='supprimer';
+    END IF;
+    
+    description:= objetAvant||'->'||objetApres;
+    INSERT into journal(moment, operation, objet, description) VALUES (NOW(), TG_OP, 'livre', description);
     return NEW;
   	END
 $$;
@@ -213,13 +239,15 @@ ALTER TABLE ONLY prix ALTER COLUMN id SET DEFAULT nextval('prix_id_seq'::regclas
 INSERT INTO journal VALUES (1, '2018-09-27 14:56:44.548576-04', 'AJOUTER', '(Harry Potter, 1987)', 'livre');
 INSERT INTO journal VALUES (2, '2018-09-27 15:09:16.921779-04', 'AJOUTER', '(Harry Potter, 1987)', 'livre');
 INSERT INTO journal VALUES (3, '2018-09-27 15:30:58.299959-04', 'AJOUTER', '(Attrape coeur)', 'livre');
+INSERT INTO journal VALUES (4, '2018-09-27 15:45:02.980049-04', 'DELETE', '(Le seigneur des Anneaux,1997,Fantasy)->()', 'livre');
+INSERT INTO journal VALUES (5, '2018-09-27 15:46:19.72316-04', 'UPDATE', '(Le vieil homme et la mer,1997,Fiction)->(Le vieil homme et la mer,2002,Fiction)', 'livre');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 3, true);
+SELECT pg_catalog.setval('journal_id_seq', 5, true);
 
 
 --
@@ -228,11 +256,11 @@ SELECT pg_catalog.setval('journal_id_seq', 3, true);
 
 INSERT INTO livre VALUES (8, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (10, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (3, 'Le vieil homme et la mer', '2002', 'Fiction', NULL);
 INSERT INTO livre VALUES (4, 'La Scouine', '1997', 'Anti-Terroir', NULL);
 INSERT INTO livre VALUES (5, '', '1997', '', NULL);
 INSERT INTO livre VALUES (2, 'La ferme des animaux', '1997', 'Apologue', NULL);
 INSERT INTO livre VALUES (1, 'Le seigneur des Anneaux', '1997', 'Fantasy', NULL);
-INSERT INTO livre VALUES (3, 'Le vieil homme et la mer', '1997', 'Fiction', NULL);
 INSERT INTO livre VALUES (6, 'Allo', '1997', 'REACH', NULL);
 INSERT INTO livre VALUES (7, '', '1997', '', NULL);
 
@@ -306,6 +334,20 @@ CREATE INDEX fki_one_livre_to_many_prix ON prix USING btree (livre);
 --
 
 CREATE TRIGGER evenementajoutlivre BEFORE INSERT ON livre FOR EACH ROW EXECUTE PROCEDURE journaliser();
+
+
+--
+-- Name: livre evenementmodificationlivre; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER evenementmodificationlivre BEFORE UPDATE ON livre FOR EACH ROW EXECUTE PROCEDURE journaliser();
+
+
+--
+-- Name: livre evenementsuppressionlivre; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER evenementsuppressionlivre BEFORE DELETE ON livre FOR EACH ROW EXECUTE PROCEDURE journaliser();
 
 
 --
