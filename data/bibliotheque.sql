@@ -61,9 +61,11 @@ ALTER FUNCTION public.copierchamps() OWNER TO postgres;
 CREATE FUNCTION journaliser() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
+DECLARE	
+	description text;
 	BEGIN
-    
-    INSERT into journal(moment, operation, objet, description) VALUES (NOW(), 'AJOUTER', 'livre', '(Harry Potter, 1987)');
+    description:='('||NEW.titre||')';
+    INSERT into journal(moment, operation, objet, description) VALUES (NOW(), 'AJOUTER', 'livre', description);
     return NEW;
   	END
 $$;
@@ -210,13 +212,14 @@ ALTER TABLE ONLY prix ALTER COLUMN id SET DEFAULT nextval('prix_id_seq'::regclas
 
 INSERT INTO journal VALUES (1, '2018-09-27 14:56:44.548576-04', 'AJOUTER', '(Harry Potter, 1987)', 'livre');
 INSERT INTO journal VALUES (2, '2018-09-27 15:09:16.921779-04', 'AJOUTER', '(Harry Potter, 1987)', 'livre');
+INSERT INTO journal VALUES (3, '2018-09-27 15:30:58.299959-04', 'AJOUTER', '(Attrape coeur)', 'livre');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 2, true);
+SELECT pg_catalog.setval('journal_id_seq', 3, true);
 
 
 --
@@ -224,6 +227,7 @@ SELECT pg_catalog.setval('journal_id_seq', 2, true);
 --
 
 INSERT INTO livre VALUES (8, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (10, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (4, 'La Scouine', '1997', 'Anti-Terroir', NULL);
 INSERT INTO livre VALUES (5, '', '1997', '', NULL);
 INSERT INTO livre VALUES (2, 'La ferme des animaux', '1997', 'Apologue', NULL);
@@ -237,7 +241,7 @@ INSERT INTO livre VALUES (7, '', '1997', '', NULL);
 -- Name: livre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('livre_id_seq', 8, true);
+SELECT pg_catalog.setval('livre_id_seq', 10, true);
 
 
 --
