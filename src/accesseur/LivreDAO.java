@@ -67,6 +67,7 @@ public class LivreDAO {
 	}
 		
 		
+		
 		public Livre rapporterLivre(int idLivre) {
 			Statement requeteLivre;
 			
@@ -109,6 +110,19 @@ public class LivreDAO {
 				e.printStackTrace();
 			}
 			
+			
+		}
+		
+		public void supprimerLivre(Livre livre) {
+			String SQL_SUPPRIMER_LIVRE = "DELETE FROM livre WHERE id=?";
+			try {
+				PreparedStatement requeteSupprimerLivre = connection.prepareStatement(SQL_SUPPRIMER_LIVRE);
+				requeteSupprimerLivre.setInt(1, livre.getId());
+				requeteSupprimerLivre.execute();
+				} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 			
 		}
 		

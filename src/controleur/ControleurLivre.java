@@ -13,6 +13,7 @@ import vue.VueEditerLivre;
 import vue.VueEditerPrix;
 import vue.VueListeLivre;
 import vue.VueLivre;
+import vue.VueSupprimerLivre;
 
 public class ControleurLivre {
 
@@ -22,6 +23,7 @@ public class ControleurLivre {
 	private VueListeLivre vueListeLivre = null;
 	private VueAjouterLivre vueAjouterLivre = null;
 	private VueEditerLivre vueEditerLivre = null;
+	private VueSupprimerLivre vueSupprimerLivre = null;
 	
 	private LivreDAO livreDAO = null;
 	private PrixDAO prixDAO = null;
@@ -51,6 +53,7 @@ public class ControleurLivre {
 		this.vueListeLivre = this.navigateur.getVueListeLivre();
 		this.vueAjouterLivre = this.navigateur.getVueAjouterLivre();
 		this.vueEditerLivre = navigateur.getVueEditerLivre();
+		this.vueSupprimerLivre = navigateur.getVueSupprimerLivre();
 		
 		
 		Livre Livre = new Livre("Le Seigneur des Anneaux", "1954", "Fantasy");
@@ -93,6 +96,14 @@ public class ControleurLivre {
 		
 	}
 	
+	public void notifierSupprimerLivre() {
+		System.out.println("ControleurLivre.notifierSupprimerLivre()");
+		Livre livre = this.navigateur.getVueSupprimerLivre().demanderLivre();
+		this.livreDAO.supprimerLivre(livre);
+		this.vueListeLivre.afficherListeLivre(this.livreDAO.listerLivres());
+		this.navigateur.naviguerVersVueListeLivre();
+	}
+	
 	public void notifierNaviguerAjouterLivre() {
 		System.out.println("ControleurLivre.notifierNaviguerAjouterLivre()");
 		this.navigateur.naviguerVersVueAjouterLivre();
@@ -104,6 +115,12 @@ public class ControleurLivre {
 		this.navigateur.naviguerVersVueEditerLivre();
 		vueEditerLivre.afficherListePrix(prixDAO.listerPrix(idLivre));
 		
+		
+	}
+	
+	public void notifierNaviguerSupprimerLivre(int idLivre) {
+		this.vueSupprimerLivre.afficherLivre(this.livreDAO.rapporterLivre(idLivre));
+		this.navigateur.naviguerVersVueSupprimerLivre();
 		
 	}
 	

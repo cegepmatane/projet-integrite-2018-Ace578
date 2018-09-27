@@ -15,6 +15,7 @@ public class NavigateurDesVues extends Application{
 	private VueListeLivre vueListeLivre;
 	private VueLivre vueLivre;
 	private VueEditerLivre vueEditerLivre;
+	private VueSupprimerLivre vueSupprimerLivre;
 	private Stage stade;
 	private VueAjouterPrix vueAjouterPrix;
 	private VueListePrix vueListePrix;
@@ -30,6 +31,7 @@ public class NavigateurDesVues extends Application{
 		this.vueLivre = new VueLivre();	
 		this.vueAjouterLivre = new VueAjouterLivre();
 		this.vueEditerLivre = new VueEditerLivre();
+		this.vueSupprimerLivre = new VueSupprimerLivre();
 		this.vueAjouterPrix = new VueAjouterPrix();
 		this.vueListePrix = new VueListePrix();
 		this.vueEditerPrix = new VueEditerPrix();
@@ -79,6 +81,15 @@ public class NavigateurDesVues extends Application{
 	
 	public VueEditerLivre getVueEditerLivre() {
 		return vueEditerLivre;
+	}
+
+	public VueSupprimerLivre getVueSupprimerLivre() {
+		return vueSupprimerLivre;
+	}
+	
+	public void naviguerVersVueSupprimerLivre() {
+		stade.setScene(this.vueSupprimerLivre);
+		stade.show();
 	}
 	
 	public void naviguerVersVueLivre() {

@@ -57,10 +57,23 @@ public class VueListeLivre extends Scene {
 				}
 				
 			});
+			
+			Button actionSupprimerLivre = new Button("Supprimer");
+			actionSupprimerLivre.setOnAction(new EventHandler<ActionEvent>(){
+
+				@Override
+				public void handle(ActionEvent arg0) {
+					controleur.notifierNaviguerSupprimerLivre(livre.getId());
+					
+				}
+				
+			});
+			
 			numero++;
 			this.grilleLivres.add(new Label(livre.getTitre()), 0, numero);
 			this.grilleLivres.add(new Label(livre.getAnnee()), 1, numero);
 			this.grilleLivres.add(actionEditerLivre,2,numero);
+			this.grilleLivres.add(actionSupprimerLivre, 3, numero);
 		}
 		
 		this.actionNaviguerAjouterLivre.setOnAction(new EventHandler<ActionEvent>() {
