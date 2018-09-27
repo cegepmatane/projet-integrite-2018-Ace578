@@ -116,9 +116,15 @@ public class LivreDAO {
 			System.out.println("LivreDAO.modifierLivre()");
 			
 			try {
-				Statement requeteModifierLivre = connection.createStatement();
-				String SQL_MODIFIER_LIVRE = "UPDATE livre SET titre ='"+livre.getTitre()+"', annee ='"+livre.getAnnee()+"', style ='"+livre.getStyle()+"'WHERE id ="+livre.getId();
-				requeteModifierLivre.execute(SQL_MODIFIER_LIVRE);
+				
+				String SQL_MODIFIER_LIVRE = "UPDATE livre SET titre = ?, annee = ?, style = ? WHERE id=?";
+				PreparedStatement requeteModifierLivre = connection.prepareStatement(SQL_MODIFIER_LIVRE);
+				requeteModifierLivre.setString(1, livre.getTitre());
+				requeteModifierLivre.setString(2, livre.getAnnee());
+				requeteModifierLivre.setString(3, livre.getStyle());
+				requeteModifierLivre.setInt(4, livre.getId());
+				
+				requeteModifierLivre.execute();
 			} catch (SQLException e) {
 				
 				e.printStackTrace();

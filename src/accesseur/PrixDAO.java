@@ -80,9 +80,14 @@ public class PrixDAO {
 		System.out.println("PrixDAO.modifierPrix()");
 		
 		try {
-			Statement requeteModifierPrix = connection.createStatement();
-			String SQL_MODIFIER_PRIX = "UPDATE prix SET nom ='"+prix.getNom()+"', promotion ='"+prix.getPromotion()+"', description ='"+prix.getDescription()+"'WHERE id ="+prix.getId();
-			requeteModifierPrix.execute(SQL_MODIFIER_PRIX);
+			String SQL_MODIFIER_PRIX = "UPDATE prix SET nom = ?, promotion = ?, description = ? WHERE id=?";
+			PreparedStatement requeteModifierPrix = connection.prepareStatement(SQL_MODIFIER_PRIX);
+			requeteModifierPrix.setString(1, prix.getNom());
+			requeteModifierPrix.setString(2, prix.getPromotion());
+			requeteModifierPrix.setString(3, prix.getDescription());
+			requeteModifierPrix.setInt(4, prix.getId());
+			
+			requeteModifierPrix.execute();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
