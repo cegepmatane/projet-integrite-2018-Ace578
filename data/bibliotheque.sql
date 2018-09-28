@@ -15,6 +15,26 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: bibliotheque; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE bibliotheque WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'French_Canada.1252' LC_CTYPE = 'French_Canada.1252';
+
+
+ALTER DATABASE bibliotheque OWNER TO postgres;
+
+\connect bibliotheque
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -176,6 +196,42 @@ ALTER SEQUENCE livre_id_seq OWNED BY livre.id;
 
 
 --
+-- Name: livresecret; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE livresecret (
+    id integer NOT NULL,
+    checksum text,
+    somme bigint,
+    moyenne bigint,
+    date timestamp with time zone
+);
+
+
+ALTER TABLE livresecret OWNER TO postgres;
+
+--
+-- Name: livresecret_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE livresecret_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE livresecret_id_seq OWNER TO postgres;
+
+--
+-- Name: livresecret_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE livresecret_id_seq OWNED BY livresecret.id;
+
+
+--
 -- Name: prix; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -226,6 +282,13 @@ ALTER TABLE ONLY livre ALTER COLUMN id SET DEFAULT nextval('livre_id_seq'::regcl
 
 
 --
+-- Name: livresecret id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY livresecret ALTER COLUMN id SET DEFAULT nextval('livresecret_id_seq'::regclass);
+
+
+--
 -- Name: prix id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -241,35 +304,74 @@ INSERT INTO journal VALUES (2, '2018-09-27 15:09:16.921779-04', 'AJOUTER', '(Har
 INSERT INTO journal VALUES (3, '2018-09-27 15:30:58.299959-04', 'AJOUTER', '(Attrape coeur)', 'livre');
 INSERT INTO journal VALUES (4, '2018-09-27 15:45:02.980049-04', 'DELETE', '(Le seigneur des Anneaux,1997,Fantasy)->()', 'livre');
 INSERT INTO journal VALUES (5, '2018-09-27 15:46:19.72316-04', 'UPDATE', '(Le vieil homme et la mer,1997,Fiction)->(Le vieil homme et la mer,2002,Fiction)', 'livre');
+INSERT INTO journal VALUES (6, '2018-09-27 15:54:42.495783-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeurs,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (7, '2018-09-27 15:54:49.095518-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape moi,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (8, '2018-09-27 15:57:19.342767-04', 'INSERT', '()->(Le Seigneur des anneaux,1965,Fantasy)', 'livre');
+INSERT INTO journal VALUES (9, '2018-09-27 16:01:00.156089-04', 'INSERT', '()->(La Scouine,2004,Terroir)', 'livre');
+INSERT INTO journal VALUES (10, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Le vieil homme et la mer,2002,Fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (11, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Attrape coeurs,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (12, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Attrape moi,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (13, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Le Seigneur des anneaux,1965,Fantasy)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (14, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(La Scouine,2004,Terroir)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (15, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(La Scouine,1997,Anti-Terroir)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (16, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(,1997,)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (17, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(La ferme des animaux,1997,Apologue)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (18, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Le seigneur des Anneaux,1997,Fantasy)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (19, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(Allo,1997,REACH)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (20, '2018-09-27 16:06:48.711069-04', 'UPDATE', '(,1997,)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (21, '2018-09-27 16:07:37.920815-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Le seigneur des anneaux,1957,fantasy)', 'livre');
+INSERT INTO journal VALUES (22, '2018-09-27 16:07:56.947177-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Harry Potter,1993,Sorcier)', 'livre');
+INSERT INTO journal VALUES (23, '2018-09-27 16:14:51.06493-04', 'UPDATE', '(Le seigneur des anneaux,1957,fantasy)->(Le seigneur des anneaux,1957,fantasy)', 'livre');
+INSERT INTO journal VALUES (24, '2018-09-27 16:14:52.496315-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (25, '2018-09-27 16:14:53.536015-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (26, '2018-09-27 16:14:54.944155-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (27, '2018-09-27 16:14:58.071997-04', 'UPDATE', '(Le seigneur des anneaux,1957,fantasy)->(Le seigneur des anneaux,1957,fantasy)', 'livre');
+INSERT INTO journal VALUES (28, '2018-09-27 16:35:09.825309-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeurs,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (29, '2018-09-27 17:11:53.880878-04', 'UPDATE', '(Le seigneur des anneaux,1957,fantasy)->(Le seigneur des anneaux,2002,fantasy)', 'livre');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 5, true);
+SELECT pg_catalog.setval('journal_id_seq', 29, true);
 
 
 --
 -- Data for Name: livre; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO livre VALUES (11, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (12, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (2, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (1, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (7, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (4, 'Harry Potter', '1993', 'Sorcier', NULL);
 INSERT INTO livre VALUES (8, 'Attrape coeur', '1959', 'fiction', NULL);
-INSERT INTO livre VALUES (10, 'Attrape coeur', '1959', 'fiction', NULL);
-INSERT INTO livre VALUES (3, 'Le vieil homme et la mer', '2002', 'Fiction', NULL);
-INSERT INTO livre VALUES (4, 'La Scouine', '1997', 'Anti-Terroir', NULL);
-INSERT INTO livre VALUES (5, '', '1997', '', NULL);
-INSERT INTO livre VALUES (2, 'La ferme des animaux', '1997', 'Apologue', NULL);
-INSERT INTO livre VALUES (1, 'Le seigneur des Anneaux', '1997', 'Fantasy', NULL);
-INSERT INTO livre VALUES (6, 'Allo', '1997', 'REACH', NULL);
-INSERT INTO livre VALUES (7, '', '1997', '', NULL);
+INSERT INTO livre VALUES (5, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (6, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (10, 'Attrape coeurs', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (3, 'Le seigneur des anneaux', '2002', 'fantasy', NULL);
 
 
 --
 -- Name: livre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('livre_id_seq', 10, true);
+SELECT pg_catalog.setval('livre_id_seq', 12, true);
+
+
+--
+-- Data for Name: livresecret; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: livresecret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('livresecret_id_seq', 1, false);
 
 
 --
@@ -289,13 +391,15 @@ INSERT INTO prix VALUES (10, 'TEst', '1998', 'null', 2);
 INSERT INTO prix VALUES (11, 'TEST2', '1990', 'null', 2);
 INSERT INTO prix VALUES (12, 'Vince', '1998', 'null', 2);
 INSERT INTO prix VALUES (13, 'Youss', '1998', 'Parfum', 2);
+INSERT INTO prix VALUES (14, 'Le plus gentillet', '2567', 'sympa', 2);
+INSERT INTO prix VALUES (15, 'Epouvantable', '2009', 'AAAAh', NULL);
 
 
 --
 -- Name: prix_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('prix_id_seq', 13, true);
+SELECT pg_catalog.setval('prix_id_seq', 15, true);
 
 
 --
@@ -356,6 +460,14 @@ CREATE TRIGGER evenementsuppressionlivre BEFORE DELETE ON livre FOR EACH ROW EXE
 
 ALTER TABLE ONLY prix
     ADD CONSTRAINT one_livre_to_many_prix FOREIGN KEY (livre) REFERENCES livre(id);
+
+
+--
+-- Name: prix suppression; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prix
+    ADD CONSTRAINT suppression FOREIGN KEY (livre) REFERENCES livre(id) ON DELETE CASCADE;
 
 
 --
