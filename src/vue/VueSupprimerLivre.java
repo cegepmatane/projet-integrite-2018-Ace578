@@ -31,6 +31,7 @@ public class VueSupprimerLivre extends Scene{
 			
 			public void handle(ActionEvent arg0) {
 				
+
 				controleur.notifierSupprimerLivre();
 			
 		}});

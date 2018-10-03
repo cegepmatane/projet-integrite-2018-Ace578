@@ -23,6 +23,7 @@ public class VueEditerPrix extends Scene {
 	protected GridPane grillePrix;
 	private ControleurPrix controleur;
 	private Button actionEnregistrerPrix;
+	private Prix prix;
 	
 	public VueEditerPrix() {
 		
@@ -63,11 +64,11 @@ public class VueEditerPrix extends Scene {
 	
 	public Prix demanderPrix()
 	{
-		Prix Prix = new Prix(valeurNom.getText(), 
-								valeurPromotion.getText(),
-									valeurDescription.getText()); 
+		prix.setNom(valeurNom.getText());
+		prix.setPromotion(valeurPromotion.getText());
+		prix.setDescription(valeurDescription.getText());
 								
-		return Prix;
+		return prix;
 	}
 
 	
@@ -76,6 +77,7 @@ public class VueEditerPrix extends Scene {
 	}
 	
 	public void afficherPrix(Prix prix) {
+		this.prix = prix;
 		this.idPrix = prix.getId();
 		this.valeurNom.setText(prix.getNom());
 		this.valeurPromotion.setText(prix.getPromotion());
