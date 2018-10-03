@@ -132,13 +132,7 @@ DECLARE
     checksum text;
     effectif integer;
 BEGIN
-	--FOR livreCourant in
-    	--SELECT livre.* FROM livre
-    --LOOP
-    	
-    
-    --END LOOP;
-    
+	
     checksum:=md5(string_agg(livre.titre::text,'' ORDER BY id)) FROM livre;
     effectif:=COUNT(*) FROM livre;
     INSERT into livresecret(checksum, effectif, date) VALUES(checksum,effectif, NOW());
@@ -146,6 +140,15 @@ BEGIN
     checksum:=md5(string_agg(prix.nom::text,'' ORDER BY id)) FROM prix;
     effectif:=COUNT(*) FROM prix;
     INSERT into prixsecret(checksum, effectif, date) VALUES(checksum,effectif,NOW());
+    
+    FOR livreCourant in
+    	SELECT livre.* FROM livre
+    LOOP
+    	checksum:=md5(string_agg(prix.nom::text,'' ORDER BY id)) FROM prix WHERE livre = livreCourant.id;
+    	effectif:=COUNT(*) FROM prix WHERE livre = livreCourant.id ;
+    	INSERT into prixparlivresecret(checksum, effectif, date) VALUES(checksum,effectif, NOW());
+    
+    END LOOP;
     
 END
 
@@ -302,6 +305,41 @@ ALTER SEQUENCE prix_id_seq OWNED BY prix.id;
 
 
 --
+-- Name: prixparlivresecret; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE prixparlivresecret (
+    id integer NOT NULL,
+    checksum text,
+    effectif integer,
+    date timestamp with time zone
+);
+
+
+ALTER TABLE prixparlivresecret OWNER TO postgres;
+
+--
+-- Name: prixparlivresecret_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE prixparlivresecret_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE prixparlivresecret_id_seq OWNER TO postgres;
+
+--
+-- Name: prixparlivresecret_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE prixparlivresecret_id_seq OWNED BY prixparlivresecret.id;
+
+
+--
 -- Name: prixsecret; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -362,6 +400,13 @@ ALTER TABLE ONLY livresecret ALTER COLUMN id SET DEFAULT nextval('livresecret_id
 --
 
 ALTER TABLE ONLY prix ALTER COLUMN id SET DEFAULT nextval('prix_id_seq'::regclass);
+
+
+--
+-- Name: prixparlivresecret id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prixparlivresecret ALTER COLUMN id SET DEFAULT nextval('prixparlivresecret_id_seq'::regclass);
 
 
 --
@@ -454,13 +499,14 @@ INSERT INTO livresecret VALUES (1, 'b6ef172d4c2e56797e2843eb848b0752', 3, '2018-
 INSERT INTO livresecret VALUES (2, 'b6ef172d4c2e56797e2843eb848b0752', 3, '2018-10-03 09:14:37.250294-04');
 INSERT INTO livresecret VALUES (3, 'b6ef172d4c2e56797e2843eb848b0752', 11, '2018-10-03 09:14:48.35981-04');
 INSERT INTO livresecret VALUES (4, 'b6ef172d4c2e56797e2843eb848b0752', 11, '2018-10-03 09:25:48.607161-04');
+INSERT INTO livresecret VALUES (7, 'b6ef172d4c2e56797e2843eb848b0752', 11, '2018-10-03 09:43:00.046248-04');
 
 
 --
 -- Name: livresecret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('livresecret_id_seq', 4, true);
+SELECT pg_catalog.setval('livresecret_id_seq', 7, true);
 
 
 --
@@ -492,17 +538,42 @@ SELECT pg_catalog.setval('prix_id_seq', 15, true);
 
 
 --
+-- Data for Name: prixparlivresecret; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO prixparlivresecret VALUES (1, 'ca60846a24252303cb9b927a2ed8563e', 2, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (2, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (3, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (4, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (5, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (6, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (7, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (8, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (9, NULL, 0, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (10, 'ed64e9b8db9e93448ecd78433cae6008', 9, '2018-10-03 09:43:00.046248-04');
+INSERT INTO prixparlivresecret VALUES (11, NULL, 0, '2018-10-03 09:43:00.046248-04');
+
+
+--
+-- Name: prixparlivresecret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('prixparlivresecret_id_seq', 11, true);
+
+
+--
 -- Data for Name: prixsecret; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO prixsecret VALUES (1, '60e6999f8ac7f1e8f73ac087ace85e01', 15, '2018-10-03 09:25:48.607161-04');
+INSERT INTO prixsecret VALUES (4, '60e6999f8ac7f1e8f73ac087ace85e01', 15, '2018-10-03 09:43:00.046248-04');
 
 
 --
 -- Name: prixsecret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('prixsecret_id_seq', 1, true);
+SELECT pg_catalog.setval('prixsecret_id_seq', 4, true);
 
 
 --
@@ -535,6 +606,14 @@ ALTER TABLE ONLY livresecret
 
 ALTER TABLE ONLY prix
     ADD CONSTRAINT prix_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: prixparlivresecret prixparlivresecret_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY prixparlivresecret
+    ADD CONSTRAINT prixparlivresecret_pkey PRIMARY KEY (id);
 
 
 --
