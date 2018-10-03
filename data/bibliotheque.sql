@@ -119,6 +119,37 @@ $$;
 
 ALTER FUNCTION public.journaliser() OWNER TO postgres;
 
+--
+-- Name: surveillertables(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION surveillertables() RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+
+DECLARE
+	livreCourant RECORD;
+    checksum text;
+    effectif integer;
+BEGIN
+	--FOR livreCourant in
+    	--SELECT livre.* FROM livre
+    --LOOP
+    	
+    
+    --END LOOP;
+    
+    checksum:=md5(string_agg(livre.titre::text,'' ORDER BY id)) FROM livre;
+    effectif:=COUNT(*) FROM livre;
+    INSERT into livresecret(checksum, effectif, date) VALUES(checksum,effectif, NOW());
+    
+END
+
+$$;
+
+
+ALTER FUNCTION public.surveillertables() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -202,8 +233,7 @@ ALTER SEQUENCE livre_id_seq OWNED BY livre.id;
 CREATE TABLE livresecret (
     id integer NOT NULL,
     checksum text,
-    somme bigint,
-    moyenne bigint,
+    effectif integer,
     date timestamp with time zone
 );
 
@@ -328,30 +358,39 @@ INSERT INTO journal VALUES (26, '2018-09-27 16:14:54.944155-04', 'UPDATE', '(Att
 INSERT INTO journal VALUES (27, '2018-09-27 16:14:58.071997-04', 'UPDATE', '(Le seigneur des anneaux,1957,fantasy)->(Le seigneur des anneaux,1957,fantasy)', 'livre');
 INSERT INTO journal VALUES (28, '2018-09-27 16:35:09.825309-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeurs,1959,fiction)', 'livre');
 INSERT INTO journal VALUES (29, '2018-09-27 17:11:53.880878-04', 'UPDATE', '(Le seigneur des anneaux,1957,fantasy)->(Le seigneur des anneaux,2002,fantasy)', 'livre');
+INSERT INTO journal VALUES (30, '2018-10-02 23:30:36.945403-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeursss,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (31, '2018-10-02 23:32:26.430109-04', 'UPDATE', '(Le seigneur des anneaux,2002,fantasy)->(Le seigneur des anneaux,2002,fantasy)', 'livre');
+INSERT INTO journal VALUES (32, '2018-10-02 23:32:32.333067-04', 'UPDATE', '(Attrape coeursss,1959,fiction)->(Attrape coeursss,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (33, '2018-10-02 23:32:33.885065-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (34, '2018-10-02 23:42:46.711126-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (35, '2018-10-02 23:46:59.820723-04', 'UPDATE', '(Attrape coeur,1959,fiction)->(Attrape coeur,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (36, '2018-10-02 23:47:04.747339-04', 'UPDATE', '(Attrape coeursss,1959,fiction)->(Attrape c,1959,fiction)', 'livre');
+INSERT INTO journal VALUES (37, '2018-10-03 08:56:26.263167-04', 'DELETE', '(Attrape c,1959,fiction)->()', 'livre');
+INSERT INTO journal VALUES (38, '2018-10-03 08:56:34.372001-04', 'DELETE', '(Attrape c,1959,fiction)->()', 'livre');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 29, true);
+SELECT pg_catalog.setval('journal_id_seq', 38, true);
 
 
 --
 -- Data for Name: livre; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO livre VALUES (11, 'Attrape coeur', '1959', 'fiction', NULL);
-INSERT INTO livre VALUES (12, 'Attrape coeur', '1959', 'fiction', NULL);
-INSERT INTO livre VALUES (2, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (1, 'Attrape coeur', '1959', 'fiction', NULL);
-INSERT INTO livre VALUES (7, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (4, 'Harry Potter', '1993', 'Sorcier', NULL);
 INSERT INTO livre VALUES (8, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (5, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (6, 'Attrape coeur', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (10, 'Attrape coeurs', '1959', 'fiction', NULL);
 INSERT INTO livre VALUES (3, 'Le seigneur des anneaux', '2002', 'fantasy', NULL);
+INSERT INTO livre VALUES (12, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (7, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (2, 'Attrape coeur', '1959', 'fiction', NULL);
+INSERT INTO livre VALUES (11, 'Attrape c', '1959', 'fiction', NULL);
 
 
 --
@@ -365,13 +404,16 @@ SELECT pg_catalog.setval('livre_id_seq', 12, true);
 -- Data for Name: livresecret; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO livresecret VALUES (1, 'b6ef172d4c2e56797e2843eb848b0752', 3, '2018-10-03 09:13:20.919548-04');
+INSERT INTO livresecret VALUES (2, 'b6ef172d4c2e56797e2843eb848b0752', 3, '2018-10-03 09:14:37.250294-04');
+INSERT INTO livresecret VALUES (3, 'b6ef172d4c2e56797e2843eb848b0752', 11, '2018-10-03 09:14:48.35981-04');
 
 
 --
 -- Name: livresecret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('livresecret_id_seq', 1, false);
+SELECT pg_catalog.setval('livresecret_id_seq', 3, true);
 
 
 --
@@ -379,7 +421,6 @@ SELECT pg_catalog.setval('livresecret_id_seq', 1, false);
 --
 
 INSERT INTO prix VALUES (2, 'Livre le mieux écris', '1984', 'WAHOU', 2);
-INSERT INTO prix VALUES (1, 'Livre le plus drôle', '1982', 'Trop le fun', 1);
 INSERT INTO prix VALUES (3, 'Livre avec la meilleur couverture', '1962', 'Majestueux', 1);
 INSERT INTO prix VALUES (4, 'AAAAA', 'AAA', 'null', NULL);
 INSERT INTO prix VALUES (5, 'AAAAA', 'AAA', 'null', NULL);
@@ -393,6 +434,7 @@ INSERT INTO prix VALUES (12, 'Vince', '1998', 'null', 2);
 INSERT INTO prix VALUES (13, 'Youss', '1998', 'Parfum', 2);
 INSERT INTO prix VALUES (14, 'Le plus gentillet', '2567', 'sympa', 2);
 INSERT INTO prix VALUES (15, 'Epouvantable', '2009', 'AAAAh', NULL);
+INSERT INTO prix VALUES (1, 'Livre le plus drôlesss', '1982', 'Trop le fun', 1);
 
 
 --
@@ -416,6 +458,14 @@ ALTER TABLE ONLY journal
 
 ALTER TABLE ONLY livre
     ADD CONSTRAINT livre_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: livresecret livresecret_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY livresecret
+    ADD CONSTRAINT livresecret_pkey PRIMARY KEY (id);
 
 
 --
@@ -455,19 +505,11 @@ CREATE TRIGGER evenementsuppressionlivre BEFORE DELETE ON livre FOR EACH ROW EXE
 
 
 --
--- Name: prix one_livre_to_many_prix; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: prix one_livre_to_many_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY prix
-    ADD CONSTRAINT one_livre_to_many_prix FOREIGN KEY (livre) REFERENCES livre(id);
-
-
---
--- Name: prix suppression; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY prix
-    ADD CONSTRAINT suppression FOREIGN KEY (livre) REFERENCES livre(id) ON DELETE CASCADE;
+    ADD CONSTRAINT one_livre_to_many_key FOREIGN KEY (livre) REFERENCES livre(id) ON DELETE CASCADE;
 
 
 --
