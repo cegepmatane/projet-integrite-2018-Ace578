@@ -21,6 +21,7 @@ public class VueSupprimerLivre extends Scene{
 	private int idLivre = 0;
 	private ControleurLivre controleur = null;
 	protected Button actionSupprimerLivre = null;
+	private Livre livre;
 
 	public VueSupprimerLivre() {
 		super(new VBox(), 400, 400);
@@ -58,15 +59,16 @@ public class VueSupprimerLivre extends Scene{
 	public Livre demanderLivre(){
 		
 		
-		Livre livre = new Livre(this.valeurTitre.getText(), 
-								this.valeurAnnee.getText(), 
-								this.valeurStyle.getText()
-								);
+		
+		livre.setTitre(valeurTitre.getText());
+		livre.setAnnee(valeurAnnee.getText());
+		livre.setStyle(valeurStyle.getText());
 		livre.setId(idLivre);
 		return livre;
 	}
 	
 	public void afficherLivre(Livre livre) {
+		this.livre = livre;
 		this.idLivre = livre.getId();
 		this.valeurTitre.setText(livre.getTitre());
 		this.valeurAnnee.setText(livre.getAnnee());
