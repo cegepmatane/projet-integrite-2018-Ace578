@@ -30,6 +30,7 @@ public class VueEditerLivre extends Scene{
 	private int compteur;
 	protected Button actionEditerPrix = null;
 	private ControleurPrix controleurPrix = null;
+	private Button actionAjouterPrix;
 
 	public VueEditerLivre() {
 		super(new VBox(), 400, 400);
@@ -41,6 +42,15 @@ public class VueEditerLivre extends Scene{
 			public void handle(ActionEvent arg0) {
 				
 				controleur.notifierEnregistrerLivre();
+			
+		}});
+		this.actionAjouterPrix = new Button("Ajouter un prix");
+		this.actionAjouterPrix.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent arg0) {
+				
+				controleurPrix.notifierNaviguerAjouterPrix(idLivre);
+				
 			
 		}});
 		
@@ -65,6 +75,7 @@ public class VueEditerLivre extends Scene{
 		panneau.getChildren().add(grilleLivre);
 		panneau.getChildren().add(grilleListePrix);
 		panneau.getChildren().add(this.actionEnregistrerLivre);
+		panneau.getChildren().add(this.actionAjouterPrix);
 				
 	}
 	

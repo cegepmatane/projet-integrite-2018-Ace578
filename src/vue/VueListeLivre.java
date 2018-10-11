@@ -26,7 +26,7 @@ public class VueListeLivre extends Scene {
 	private ControleurPrix controleurPrix = null;
 	public VueListeLivre() {
 		
-		super(new GridPane(), 400, 400);
+		super(new GridPane(), 400, 600);
 		Pane panneau = (Pane) this.getRoot();	
 		grilleLivres = new GridPane();
 		panneau.getChildren().add(grilleLivres);

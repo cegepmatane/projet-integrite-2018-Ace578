@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modele.Livre;
 import modele.Prix;
 public class VueAjouterPrix extends Scene{
 	protected TextField valeurNom;
@@ -20,6 +21,7 @@ public class VueAjouterPrix extends Scene{
 	protected TextField valeurDescription;
 	private ControleurPrix controleur;
 	protected Button actionAjouterPrix;
+	private int idLivre = 0;
 	
 	
 	public VueAjouterPrix() {
@@ -31,7 +33,7 @@ public class VueAjouterPrix extends Scene{
 			
 			public void handle(ActionEvent arg0) {
 				
-				controleur.notifierAjouterPrix();
+				controleur.notifierAjouterPrix(idLivre);
 			
 		}});
 		
@@ -62,6 +64,12 @@ public class VueAjouterPrix extends Scene{
 				
 		return Prix;
 	}
+	
+	public void setIdLivre(int idLivre) {
+		this.idLivre = idLivre;
+	}
+	
+	
 	
 	public void setControleur(ControleurPrix controleur) {
 		this.controleur = controleur;

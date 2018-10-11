@@ -126,14 +126,15 @@ public class PrixDAO {
 		return null;
 	}
 	
-	public void ajouterPrix(Prix prix) {
+	public void ajouterPrix(Prix prix, int idLivre) {
 		System.out.println("PrixDAO.ajouterPrix()");
 		try {
-			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description) VALUES (?,?,?)";
+			String SQL_AJOUTER_PRIX = "INSERT into prix(nom, promotion, description, livre) VALUES (?,?,?,?)";
 			PreparedStatement requeteAjouterPrix = connection.prepareStatement(SQL_AJOUTER_PRIX);
 			requeteAjouterPrix.setString(1, prix.getNom());
 			requeteAjouterPrix.setString(2, prix.getPromotion());
 			requeteAjouterPrix.setString(3, prix.getDescription());
+			requeteAjouterPrix.setInt(4, idLivre);
 			requeteAjouterPrix.execute();
 		} catch (SQLException e) {
 			

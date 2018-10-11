@@ -27,7 +27,8 @@ public class VueListePrix extends Scene {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		grillePrix = new GridPane();
-		actionNaviguerVersAjouter = new Button ("Ajouter un prix");
+		
+		/**actionNaviguerVersAjouter = new Button ("Ajouter un prix");
 		actionNaviguerVersAjouter.setOnAction(new EventHandler<ActionEvent>() {
 			
 			public void handle(ActionEvent arg0) {
@@ -35,7 +36,7 @@ public class VueListePrix extends Scene {
 				controleur.notifierNaviguerAjouterPrix();
 			
 		}});
-		
+		*/
 		actionNaviguerVersAccueil = new Button ("Retour aux livres");
 		actionNaviguerVersAccueil.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -47,7 +48,7 @@ public class VueListePrix extends Scene {
 		
 		
 		panneau.getChildren().add(grillePrix);
-		panneau.getChildren().add(actionNaviguerVersAjouter);
+		//panneau.getChildren().add(actionNaviguerVersAjouter);
 		panneau.getChildren().add(actionNaviguerVersAccueil);
 				
 		

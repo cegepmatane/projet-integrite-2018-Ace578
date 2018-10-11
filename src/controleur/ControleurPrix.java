@@ -8,6 +8,7 @@ import modele.Prix;
 import modele.Prix;
 import vue.NavigateurDesVues;
 import vue.VueAjouterPrix;
+import vue.VueEditerLivre;
 import vue.VueEditerPrix;
 import vue.VueListePrix;
 import vue.VuePrix;
@@ -20,11 +21,13 @@ public class ControleurPrix {
 	private VueAjouterPrix vueAjouterPrix = null;
 	private VueEditerPrix vueEditerPrix = null;
 
+	
 
 	
 	private ControleurPrix(){
 		
 		this.prixDAO = new PrixDAO();
+		
 	}
 	
 	private static ControleurPrix instance = null; 
@@ -46,6 +49,7 @@ public class ControleurPrix {
 		this.vueAjouterPrix = this.navigateur.getVueAjouterPrix();
 		this.vueEditerPrix = navigateur.getVueEditerPrix();
 		
+		
 		List<Prix> listeLivresTest = prixDAO.listerTousPrix();
 		this.vueListePrix.afficherListePrix(listeLivresTest);
 		
@@ -62,10 +66,10 @@ public class ControleurPrix {
 	}
 	
 	
-	public void notifierAjouterPrix () {
+	public void notifierAjouterPrix (int idLivre) {
 		System.out.println("ControleurPrix.notifierEnregistrerNouveauPrix()");
-		Prix Prix = this.navigateur.getVueAjouterPrix().demanderPrix();
-		this.prixDAO.ajouterPrix(Prix);
+		Prix Prix = this.navigateur.getVueAjouterPrix().demanderPrix(); 
+		this.prixDAO.ajouterPrix(Prix,idLivre);
 		this.vueListePrix.afficherListePrix(this.prixDAO.listerTousPrix());
 		this.navigateur.naviguerVersVueListePrix();
 		
@@ -78,9 +82,11 @@ public class ControleurPrix {
 		
 	}
 	
-	public void notifierNaviguerAjouterPrix() {
+	public void notifierNaviguerAjouterPrix(int idLivre) {
 		System.out.println("ControleurLivre.notifierNaviguerAjouterPrix()");
 		this.navigateur.naviguerVersVueAjouterPrix();
+		this.vueAjouterPrix.setIdLivre(idLivre);
+		
 	}
 	
 	public void notifierNaviguerListePrix() {
